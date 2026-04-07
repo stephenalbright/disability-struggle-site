@@ -86,17 +86,19 @@ body {
 }
 
 .btn--waitlist {
-  background: transparent;
+  background: #FFFFFF;
   color: var(--accent);
-  border: 1px solid rgba(59, 130, 246, 0.3);
-  padding: 12px 24px;
-  font-size: 1rem;
-  margin-top: 12px;
+  border: none;
+  padding: 16px 32px;
+  font-size: 1.05rem;
+  margin-top: 16px;
+  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.1);
 }
 
 .btn--waitlist:hover {
-  border-color: var(--accent);
-  background: var(--accent-glow);
+  background: #F0F4FF;
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.15);
 }
 
 .btn--submit {
@@ -290,6 +292,26 @@ body {
 
 .count-number {
   font-variant-numeric: tabular-nums;
+}
+
+/* --- "Until now" title card --- */
+.until-now {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 60vh;
+}
+
+.until-now-text {
+  font-family: var(--font-display);
+  font-size: clamp(5rem, 14vw, 140px);
+  font-weight: 900;
+  color: var(--accent);
+  opacity: 0;
+  text-align: center;
+  letter-spacing: -0.03em;
+  text-shadow: 0 0 60px rgba(59, 130, 246, 0.3), 0 0 120px rgba(59, 130, 246, 0.1);
 }
 
 /* ═══════════════════════════════════════════
@@ -556,9 +578,14 @@ body {
               radial-gradient(ellipse at 20% 70%, #4F46E5 0%, transparent 50%);
 }
 
-.card--tbi .card-visual {
-  background: radial-gradient(ellipse at 40% 30%, #EC4899 0%, transparent 60%),
-              radial-gradient(ellipse at 70% 70%, #9333EA 0%, transparent 50%);
+.card--dementia .card-visual {
+  background: radial-gradient(ellipse at 30% 20%, #F59E0B 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 80%, #D97706 0%, transparent 50%);
+}
+
+.card--als .card-visual {
+  background: radial-gradient(ellipse at 60% 40%, #22C55E 0%, transparent 60%),
+              radial-gradient(ellipse at 30% 80%, #059669 0%, transparent 50%);
 }
 
 .card--autism .card-visual {
@@ -1057,6 +1084,31 @@ input:focus-visible,
 select:focus-visible {
   outline: 2px solid var(--accent);
   outline-offset: 2px;
+}
+
+/* --- Toast --- */
+.toast {
+  position: fixed;
+  bottom: 32px;
+  left: 50%;
+  transform: translateX(-50%) translateY(100px);
+  background: #FFFFFF;
+  color: var(--accent);
+  font-family: var(--font-body);
+  font-size: 1rem;
+  font-weight: 700;
+  padding: 16px 32px;
+  border-radius: 100px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4), 0 0 0 1px rgba(59, 130, 246, 0.2);
+  z-index: 1000;
+  pointer-events: none;
+  opacity: 0;
+  transition: none;
+}
+
+.toast--visible {
+  opacity: 1;
+  transform: translateX(-50%) translateY(0);
 }
 
 /* --- Reduced motion --- */

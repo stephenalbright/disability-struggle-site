@@ -187,6 +187,43 @@ document.querySelectorAll('[data-problem]').forEach((el) => {
   });
 });
 
+// ═══════════════════════════════════════════
+// "UNTIL NOW" — CINEMATIC PIN
+// ═══════════════════════════════════════════
+const untilNowText = document.querySelector('.until-now-text');
+if (untilNowText) {
+  const untilTl = gsap.timeline({
+    scrollTrigger: {
+      trigger: '.until-now',
+      start: 'top 60%',
+      end: '+=800',
+      pin: true,
+      scrub: false,
+      toggleActions: 'play none none none',
+    },
+  });
+
+  untilTl
+    .to(untilNowText, {
+      opacity: 1,
+      scale: 1,
+      duration: 0.8,
+      ease: 'power3.out',
+    })
+    .to(untilNowText, {
+      opacity: 1,
+      duration: 1.2,
+    })
+    .to(untilNowText, {
+      opacity: 0,
+      scale: 1.05,
+      duration: 0.6,
+      ease: 'power2.in',
+    });
+
+  gsap.set(untilNowText, { scale: 0.9 });
+}
+
 // --- Product card + phone mockup: slides up ---
 gsap.to('.product-card', {
   opacity: 1,
@@ -410,12 +447,48 @@ function showMessage(text, type) {
   message.className = `form-message form-message--${type}`;
 }
 
-// --- Scroll to waitlist with pre-selected condition ---
+// ═══════════════════════════════════════════
+// TOAST NOTIFICATION
+// ═══════════════════════════════════════════
+let toastTimer;
+function showToast(text) {
+  const toast = document.getElementById('toast');
+  if (!toast) return;
+  clearTimeout(toastTimer);
+  toast.textContent = text;
+  toast.classList.remove('toast--visible');
+
+  // Force reflow so the animation restarts
+  void toast.offsetWidth;
+
+  gsap.fromTo(toast,
+    { opacity: 0, y: 40 },
+    { opacity: 1, y: 0, duration: 0.4, ease: 'power3.out',
+      onStart() { toast.classList.add('toast--visible'); }
+    }
+  );
+
+  toastTimer = setTimeout(() => {
+    gsap.to(toast, {
+      opacity: 0, y: 20, duration: 0.3, ease: 'power2.in',
+      onComplete() { toast.classList.remove('toast--visible'); }
+    });
+  }, 3000);
+}
+
+// --- Scroll to waitlist with pre-selected condition + toast ---
 function scrollToWaitlist(condition) {
   const select = document.getElementById('waitlist-condition');
-  if (select) {
+  if (select && condition) {
     select.value = condition;
   }
+
+  if (condition) {
+    showToast(`Signing up for ${condition} waitlist`);
+  } else {
+    showToast('Signing up for the waitlist');
+  }
+
   document.getElementById('waitlist').scrollIntoView({ behavior: 'smooth' });
   setTimeout(() => {
     document.getElementById('waitlist-email').focus();
