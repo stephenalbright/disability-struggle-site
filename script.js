@@ -187,43 +187,6 @@ document.querySelectorAll('[data-problem]').forEach((el) => {
   });
 });
 
-// ═══════════════════════════════════════════
-// "UNTIL NOW" — CINEMATIC PIN
-// ═══════════════════════════════════════════
-const untilNowText = document.querySelector('.until-now-text');
-if (untilNowText) {
-  const untilTl = gsap.timeline({
-    scrollTrigger: {
-      trigger: '.until-now',
-      start: 'top 60%',
-      end: '+=800',
-      pin: true,
-      scrub: false,
-      toggleActions: 'play none none none',
-    },
-  });
-
-  untilTl
-    .to(untilNowText, {
-      opacity: 1,
-      scale: 1,
-      duration: 0.8,
-      ease: 'power3.out',
-    })
-    .to(untilNowText, {
-      opacity: 1,
-      duration: 1.2,
-    })
-    .to(untilNowText, {
-      opacity: 0,
-      scale: 1.05,
-      duration: 0.6,
-      ease: 'power2.in',
-    });
-
-  gsap.set(untilNowText, { scale: 0.9 });
-}
-
 // --- Product card + phone mockup: slides up ---
 gsap.to('.product-card', {
   opacity: 1,
@@ -340,16 +303,15 @@ gsap.to('[data-diff]', {
   },
 });
 
-// --- Credentials: stagger in ---
-gsap.to('[data-cred]', {
+// --- Credential tags: fade in ---
+gsap.to('.about-creds', {
   opacity: 1,
   y: 0,
   duration: 0.6,
   ease: 'power2.out',
-  stagger: 0.1,
   scrollTrigger: {
-    trigger: '.cred-row',
-    start: 'top 85%',
+    trigger: '.about-creds',
+    start: 'top 90%',
     toggleActions: 'play none none none',
   },
 });

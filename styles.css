@@ -86,19 +86,19 @@ body {
 }
 
 .btn--waitlist {
-  background: #FFFFFF;
-  color: var(--accent);
-  border: none;
-  padding: 16px 32px;
-  font-size: 1.05rem;
-  margin-top: 16px;
-  box-shadow: 0 4px 16px rgba(255, 255, 255, 0.1);
+  background: transparent;
+  color: rgba(255, 255, 255, 0.7);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  padding: 12px 24px;
+  font-size: 0.95rem;
+  font-weight: 600;
+  margin-top: 12px;
 }
 
 .btn--waitlist:hover {
-  background: #F0F4FF;
-  transform: translateY(-2px);
-  box-shadow: 0 8px 24px rgba(255, 255, 255, 0.15);
+  color: #FFFFFF;
+  border-color: rgba(255, 255, 255, 0.35);
+  background: rgba(255, 255, 255, 0.05);
 }
 
 .btn--submit {
@@ -259,11 +259,10 @@ body {
    THE PROBLEM
    ═══════════════════════════════════════════ */
 .problem {
-  min-height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 80px 24px;
+  padding: 100px 24px 80px;
 }
 
 .problem-inner {
@@ -294,31 +293,12 @@ body {
   font-variant-numeric: tabular-nums;
 }
 
-/* --- "Until now" title card --- */
-.until-now {
-  position: relative;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 60vh;
-}
-
-.until-now-text {
-  font-family: var(--font-display);
-  font-size: clamp(5rem, 14vw, 140px);
-  font-weight: 900;
-  color: var(--accent);
-  opacity: 0;
-  text-align: center;
-  letter-spacing: -0.03em;
-  text-shadow: 0 0 60px rgba(59, 130, 246, 0.3), 0 0 120px rgba(59, 130, 246, 0.1);
-}
 
 /* ═══════════════════════════════════════════
    APHASIAGPT — LIVE PRODUCT
    ═══════════════════════════════════════════ */
 .product-live {
-  padding: 120px 24px;
+  padding: 80px 24px;
 }
 
 .product-layout {
@@ -512,7 +492,7 @@ body {
    COMING SOON GRID
    ═══════════════════════════════════════════ */
 .coming-soon {
-  padding: 120px 24px;
+  padding: 80px 24px;
 }
 
 .section-title {
@@ -680,7 +660,7 @@ body {
    THE PLATFORM
    ═══════════════════════════════════════════ */
 .platform {
-  padding: 120px 24px;
+  padding: 80px 24px;
 }
 
 .platform-layout {
@@ -786,7 +766,7 @@ body {
    ABOUT / FOUNDER
    ═══════════════════════════════════════════ */
 .about {
-  padding: 120px 24px;
+  padding: 80px 24px;
 }
 
 .about-content {
@@ -808,67 +788,32 @@ body {
   margin-top: 8px;
 }
 
-/* ═══════════════════════════════════════════
-   CREDENTIALS
-   ═══════════════════════════════════════════ */
-.credentials {
-  padding: 80px 24px;
-}
-
-.cred-row {
+/* --- Inline Credential Tags (in founder section) --- */
+.about-creds {
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
-  gap: 16px;
-}
-
-.cred-badge {
-  display: inline-flex;
-  align-items: center;
-  gap: 10px;
-  padding: 14px 24px;
-  background: var(--bg-card);
-  border: 1px solid rgba(255, 255, 255, 0.08);
-  border-radius: 100px;
+  gap: 8px;
+  margin-top: 24px;
   opacity: 0;
   transform: translateY(15px);
 }
 
-.cred-icon {
-  width: 20px;
-  height: 20px;
-  color: var(--accent);
-  flex-shrink: 0;
-}
-
-.cred-icon svg {
-  width: 100%;
-  height: 100%;
-}
-
-.cred-text {
-  font-size: 1rem;
+.about-cred-tag {
+  display: inline-block;
+  padding: 6px 14px;
+  font-size: 0.8rem;
   font-weight: 600;
   color: var(--text-muted);
-  white-space: nowrap;
-}
-
-@media (max-width: 900px) {
-  .cred-row {
-    flex-direction: column;
-    align-items: center;
-  }
-
-  .cred-text {
-    white-space: normal;
-  }
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  letter-spacing: 0.01em;
 }
 
 /* ═══════════════════════════════════════════
    BUILT DIFFERENT
    ═══════════════════════════════════════════ */
 .built-different {
-  padding: 120px 24px;
+  padding: 80px 24px;
 }
 
 .diff-grid {
