@@ -99,6 +99,20 @@ gsap.from('.about-content', {
   },
 });
 
+// --- Credentials: stagger in ---
+gsap.to('[data-cred]', {
+  opacity: 1,
+  y: 0,
+  duration: 0.6,
+  ease: 'power2.out',
+  stagger: 0.1,
+  scrollTrigger: {
+    trigger: '.cred-row',
+    start: 'top 85%',
+    toggleActions: 'play none none none',
+  },
+});
+
 // --- Built Different: stagger in ---
 gsap.from('.built-different .section-title', {
   opacity: 0,
