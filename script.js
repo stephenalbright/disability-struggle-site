@@ -4,6 +4,92 @@
 
 gsap.registerPlugin(ScrollTrigger);
 
+// ═══════════════════════════════════════════
+// HERO STAR FIELD
+// ═══════════════════════════════════════════
+(function initStarField() {
+  const canvas = document.getElementById('hero-canvas');
+  if (!canvas) return;
+  const ctx = canvas.getContext('2d');
+
+  let w, h, stars;
+  const STAR_COUNT = 200;
+  const SPEED = 0.15;
+
+  function resize() {
+    w = canvas.width = canvas.offsetWidth * devicePixelRatio;
+    h = canvas.height = canvas.offsetHeight * devicePixelRatio;
+    ctx.scale(devicePixelRatio, devicePixelRatio);
+  }
+
+  function createStars() {
+    stars = [];
+    const cw = canvas.offsetWidth;
+    const ch = canvas.offsetHeight;
+    for (let i = 0; i < STAR_COUNT; i++) {
+      stars.push({
+        x: Math.random() * cw,
+        y: Math.random() * ch,
+        r: Math.random() * 1.5 + 0.3,
+        alpha: Math.random() * 0.6 + 0.1,
+        drift: (Math.random() - 0.5) * SPEED,
+        twinkleSpeed: Math.random() * 0.02 + 0.005,
+        twinklePhase: Math.random() * Math.PI * 2,
+      });
+    }
+  }
+
+  let frame = 0;
+  function draw() {
+    const cw = canvas.offsetWidth;
+    const ch = canvas.offsetHeight;
+    ctx.clearRect(0, 0, cw, ch);
+
+    // Animated gradient background
+    const t = frame * 0.003;
+    const grd = ctx.createRadialGradient(
+      cw * (0.5 + 0.2 * Math.sin(t)), ch * (0.3 + 0.1 * Math.cos(t * 0.7)), 0,
+      cw * 0.5, ch * 0.5, cw * 0.8
+    );
+    grd.addColorStop(0, 'rgba(15, 25, 50, 0.3)');
+    grd.addColorStop(0.5, 'rgba(10, 10, 10, 0.1)');
+    grd.addColorStop(1, 'transparent');
+    ctx.fillStyle = grd;
+    ctx.fillRect(0, 0, cw, ch);
+
+    // Stars
+    for (const s of stars) {
+      const twinkle = Math.sin(frame * s.twinkleSpeed + s.twinklePhase);
+      const alpha = s.alpha * (0.5 + 0.5 * twinkle);
+
+      ctx.beginPath();
+      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(201, 168, 76, ${alpha})`;
+      ctx.fill();
+
+      // Soft glow on brighter stars
+      if (s.r > 1) {
+        ctx.beginPath();
+        ctx.arc(s.x, s.y, s.r * 3, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(201, 168, 76, ${alpha * 0.1})`;
+        ctx.fill();
+      }
+
+      s.y += s.drift;
+      if (s.y < -5) s.y = ch + 5;
+      if (s.y > ch + 5) s.y = -5;
+    }
+
+    frame++;
+    requestAnimationFrame(draw);
+  }
+
+  resize();
+  createStars();
+  draw();
+  window.addEventListener('resize', () => { resize(); createStars(); });
+})();
+
 // --- Hero entrance sequence ---
 const heroTl = gsap.timeline({ delay: 0.3 });
 heroTl
@@ -28,14 +114,27 @@ document.querySelectorAll('[data-problem]').forEach((el) => {
   gsap.set(el, { y: 30 });
 });
 
-// --- Product card: slides up ---
+// --- Product card + phone mockup: slides up ---
 gsap.to('.product-card', {
   opacity: 1,
   y: 0,
   duration: 1,
   ease: 'power3.out',
   scrollTrigger: {
-    trigger: '.product-card',
+    trigger: '.product-layout',
+    start: 'top 85%',
+    toggleActions: 'play none none none',
+  },
+});
+
+gsap.to('.phone-mockup', {
+  opacity: 1,
+  y: 0,
+  duration: 1,
+  delay: 0.2,
+  ease: 'power3.out',
+  scrollTrigger: {
+    trigger: '.product-layout',
     start: 'top 85%',
     toggleActions: 'play none none none',
   },

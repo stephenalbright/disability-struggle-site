@@ -182,6 +182,15 @@ body {
   pointer-events: none;
 }
 
+.hero-canvas {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+}
+
 .hero-content {
   text-align: center;
   z-index: 1;
@@ -278,9 +287,18 @@ body {
   padding: 120px 24px;
 }
 
-.product-card {
-  max-width: 640px;
+.product-layout {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 60px;
+  max-width: 1000px;
   margin: 0 auto;
+}
+
+.product-card {
+  flex: 1;
+  max-width: 520px;
   background: var(--bg-card);
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: var(--radius);
@@ -292,6 +310,138 @@ body {
 
 .product-card:hover {
   border-color: rgba(201, 168, 76, 0.2);
+}
+
+/* --- Phone Mockup --- */
+.phone-mockup {
+  flex-shrink: 0;
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.phone-frame {
+  width: 280px;
+  height: 560px;
+  background: #1A1A1A;
+  border-radius: 40px;
+  border: 3px solid rgba(255, 255, 255, 0.1);
+  padding: 12px;
+  position: relative;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.05),
+    0 20px 60px rgba(0, 0, 0, 0.5),
+    inset 0 1px 0 rgba(255, 255, 255, 0.05);
+}
+
+.phone-notch {
+  width: 100px;
+  height: 28px;
+  background: #1A1A1A;
+  border-radius: 0 0 16px 16px;
+  margin: 0 auto;
+  position: relative;
+  z-index: 2;
+}
+
+.phone-screen {
+  background: #0F0F0F;
+  border-radius: 28px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  margin-top: -14px;
+}
+
+.screen-header {
+  padding: 40px 20px 16px;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.screen-logo {
+  font-family: var(--font-display);
+  font-size: 1.1rem;
+  font-weight: 800;
+  color: var(--accent);
+}
+
+.screen-chat {
+  flex: 1;
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  overflow: hidden;
+}
+
+.chat-bubble {
+  padding: 12px 16px;
+  border-radius: 16px;
+  font-size: 0.8rem;
+  line-height: 1.5;
+  max-width: 85%;
+}
+
+.chat-label {
+  display: block;
+  font-size: 0.65rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  margin-bottom: 4px;
+  color: var(--accent);
+}
+
+.chat-bubble--ai {
+  background: rgba(201, 168, 76, 0.1);
+  color: var(--text);
+  border-bottom-left-radius: 4px;
+  align-self: flex-start;
+}
+
+.chat-bubble--user {
+  background: rgba(255, 255, 255, 0.08);
+  color: var(--text);
+  border-bottom-right-radius: 4px;
+  align-self: flex-end;
+}
+
+.screen-input {
+  padding: 12px 16px;
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.input-placeholder {
+  flex: 1;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+  opacity: 0.5;
+}
+
+.input-mic {
+  width: 28px;
+  height: 28px;
+  color: var(--accent);
+}
+
+.input-mic svg {
+  width: 100%;
+  height: 100%;
+}
+
+@media (max-width: 900px) {
+  .product-layout {
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .phone-frame {
+    width: 240px;
+    height: 480px;
+  }
 }
 
 .product-header {
@@ -352,18 +502,66 @@ body {
   background: var(--bg-card);
   border: 1px solid rgba(255, 255, 255, 0.06);
   border-radius: var(--radius);
-  padding: 36px 28px;
   opacity: 0;
   transform: translateY(40px);
   transition: all 0.3s ease;
   display: flex;
   flex-direction: column;
+  position: relative;
+  overflow: hidden;
 }
 
 .card:hover {
   border-color: rgba(201, 168, 76, 0.2);
   transform: translateY(-4px);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+}
+
+.card:hover .card-visual {
+  opacity: 0.15;
+  transform: scale(1.05);
+}
+
+.card-visual {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0.08;
+  transition: all 0.5s ease;
+  z-index: 0;
+}
+
+.card--dementia .card-visual {
+  background: radial-gradient(ellipse at 30% 20%, #C9A84C 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 80%, #8B6914 0%, transparent 50%);
+}
+
+.card--apraxia .card-visual {
+  background: radial-gradient(ellipse at 50% 30%, #6B8AFF 0%, transparent 60%),
+              radial-gradient(ellipse at 20% 70%, #4F46E5 0%, transparent 50%);
+}
+
+.card--als .card-visual {
+  background: radial-gradient(ellipse at 60% 40%, #22C55E 0%, transparent 60%),
+              radial-gradient(ellipse at 30% 80%, #059669 0%, transparent 50%);
+}
+
+.card--tbi .card-visual {
+  background: radial-gradient(ellipse at 40% 30%, #EC4899 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 70%, #9333EA 0%, transparent 50%);
+}
+
+.card--stroke .card-visual {
+  background: radial-gradient(ellipse at 50% 20%, #F97316 0%, transparent 60%),
+              radial-gradient(ellipse at 40% 80%, #DC2626 0%, transparent 50%);
+}
+
+.card-body {
+  position: relative;
+  z-index: 1;
+  padding: 36px 28px;
 }
 
 .card--mystery {
@@ -375,11 +573,38 @@ body {
   text-align: center;
 }
 
+.card--mystery .card-body {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+}
+
 .card-icon {
-  width: 48px;
-  height: 48px;
+  width: 56px;
+  height: 56px;
   margin-bottom: 20px;
   color: var(--accent);
+}
+
+.card-icon--animated .icon-ring {
+  animation: icon-rotate 8s linear infinite;
+  transform-origin: center;
+}
+
+.card-icon--animated .icon-pulse {
+  animation: icon-glow 2.5s ease-in-out infinite;
+}
+
+@keyframes icon-rotate {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+@keyframes icon-glow {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.4; }
 }
 
 .card-icon--plus {
