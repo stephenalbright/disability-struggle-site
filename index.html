@@ -26,8 +26,8 @@
         <svg viewBox="0 0 120 120" class="ds-mark" aria-hidden="true">
           <defs>
             <linearGradient id="logo-gradient" x1="0%" y1="0%" x2="100%" y2="100%">
-              <stop offset="0%" stop-color="#C9A84C"/>
-              <stop offset="100%" stop-color="#E8D48B"/>
+              <stop offset="0%" stop-color="#3B82F6"/>
+              <stop offset="100%" stop-color="#60A5FA"/>
             </linearGradient>
           </defs>
           <text x="50%" y="55%" text-anchor="middle" dominant-baseline="central"
@@ -136,7 +136,8 @@
               </svg>
             </div>
             <h3 class="card-title">Dementia</h3>
-            <p class="card-desc">Cognitive support for daily living</p>
+            <p class="card-desc">AI cognitive support for daily living</p>
+            <p class="card-for">For: Caregivers, Family</p>
             <span class="badge badge--soon">Coming Soon</span>
             <button class="btn btn--waitlist" onclick="scrollToWaitlist('Dementia')">Join Waitlist</button>
           </div>
@@ -156,6 +157,7 @@
             </div>
             <h3 class="card-title">Apraxia</h3>
             <p class="card-desc">Motor speech recovery through AI</p>
+            <p class="card-for">For: SLPs, Pediatrics</p>
             <span class="badge badge--soon">Coming Soon</span>
             <button class="btn btn--waitlist" onclick="scrollToWaitlist('Apraxia')">Join Waitlist</button>
           </div>
@@ -175,6 +177,7 @@
             </div>
             <h3 class="card-title">ALS</h3>
             <p class="card-desc">Communication tools that adapt as you do</p>
+            <p class="card-for">For: Caregivers, Family</p>
             <span class="badge badge--soon">Coming Soon</span>
             <button class="btn btn--waitlist" onclick="scrollToWaitlist('ALS')">Join Waitlist</button>
           </div>
@@ -195,7 +198,8 @@
               </svg>
             </div>
             <h3 class="card-title">TBI</h3>
-            <p class="card-desc">Rebuilding cognition after traumatic brain injury</p>
+            <p class="card-desc">Rebuilding cognition after brain injury</p>
+            <p class="card-for">For: Therapists, Family</p>
             <span class="badge badge--soon">Coming Soon</span>
             <button class="btn btn--waitlist" onclick="scrollToWaitlist('TBI')">Join Waitlist</button>
           </div>
@@ -214,24 +218,71 @@
               </svg>
             </div>
             <h3 class="card-title">Stroke Recovery</h3>
-            <p class="card-desc">Comprehensive post-stroke rehabilitation</p>
+            <p class="card-desc">Comprehensive post-stroke rehab</p>
+            <p class="card-for">For: SLPs, OTs</p>
             <span class="badge badge--soon">Coming Soon</span>
             <button class="btn btn--waitlist" onclick="scrollToWaitlist('Stroke Recovery')">Join Waitlist</button>
           </div>
         </div>
 
-        <div class="card card--mystery" data-card>
+        <div class="card card--pediatrics" data-card>
+          <div class="card-visual" aria-hidden="true"></div>
           <div class="card-body">
-            <div class="card-icon card-icon--plus">
-              <svg viewBox="0 0 56 56" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true">
-                <path d="M28 16v24M16 28h24"/>
+            <div class="card-icon card-icon--animated">
+              <svg viewBox="0 0 56 56" fill="none" aria-hidden="true">
+                <circle cx="28" cy="28" r="24" stroke="currentColor" stroke-width="1" opacity="0.3"/>
+                <circle cx="28" cy="20" r="7" stroke="currentColor" stroke-width="2"/>
+                <path d="M18 42c0-6 4-12 10-12s10 6 10 12" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="icon-ring"/>
+                <circle cx="28" cy="20" r="2" fill="currentColor" class="icon-pulse"/>
               </svg>
             </div>
-            <h3 class="card-title">More Coming</h3>
-            <p class="card-desc">This is just the beginning</p>
+            <h3 class="card-title">Pediatrics</h3>
+            <p class="card-desc">Early intervention powered by AI</p>
+            <p class="card-for">For: SLPs, Parents</p>
+            <span class="badge badge--soon">Coming Soon</span>
+            <button class="btn btn--waitlist" onclick="scrollToWaitlist('Pediatrics')">Join Waitlist</button>
           </div>
         </div>
 
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- THE PLATFORM -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section id="platform" class="platform">
+    <div class="container">
+      <div class="platform-inner">
+        <h2 class="section-title">One Portal. Every Condition.</h2>
+        <div class="platform-layout">
+          <div class="platform-text">
+            <p class="platform-desc">
+              The SLP &amp; Caregiver Portal is the single command center that connects
+              to every patient tool we build. Manage caseloads, track progress, assign
+              exercises — across every condition, from one login.
+            </p>
+            <p class="platform-desc">
+              The tools change. The platform doesn't.
+            </p>
+            <p class="platform-desc platform-desc--accent">
+              One portal. One subscription. Every condition your patients need.
+            </p>
+          </div>
+          <div class="platform-diagram" aria-hidden="true">
+            <div class="diagram-hub">
+              <span>Portal</span>
+            </div>
+            <div class="diagram-spokes">
+              <div class="diagram-spoke" style="--angle: 0deg"><span>Aphasia</span></div>
+              <div class="diagram-spoke" style="--angle: 60deg"><span>Dementia</span></div>
+              <div class="diagram-spoke" style="--angle: 120deg"><span>Apraxia</span></div>
+              <div class="diagram-spoke" style="--angle: 180deg"><span>ALS</span></div>
+              <div class="diagram-spoke" style="--angle: 240deg"><span>TBI</span></div>
+              <div class="diagram-spoke" style="--angle: 300deg"><span>Stroke</span></div>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </section>
@@ -376,6 +427,7 @@
               <option value="ALS">ALS</option>
               <option value="TBI">TBI</option>
               <option value="Stroke Recovery">Stroke Recovery</option>
+              <option value="Pediatrics">Pediatrics</option>
               <option value="Aphasia">Aphasia</option>
               <option value="Other">Other</option>
             </select>
@@ -399,7 +451,7 @@
         <svg viewBox="0 0 80 40" class="footer-mark" aria-label="DS logo">
           <text x="50%" y="55%" text-anchor="middle" dominant-baseline="central"
                 font-family="'DM Sans', sans-serif" font-weight="700" font-size="28"
-                fill="#C9A84C">DS</text>
+                fill="#3B82F6">DS</text>
         </svg>
       </div>
       <nav class="footer-links" aria-label="Footer navigation">

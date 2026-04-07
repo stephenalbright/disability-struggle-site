@@ -15,9 +15,9 @@
   --bg-card-hover: #1A1A1A;
   --text: #F5F5F5;
   --text-muted: #9A9A9A;
-  --accent: #C9A84C;
-  --accent-light: #E8D48B;
-  --accent-glow: rgba(201, 168, 76, 0.15);
+  --accent: #3B82F6;
+  --accent-light: #60A5FA;
+  --accent-glow: rgba(59, 130, 246, 0.15);
   --live-green: #22C55E;
   --soon-blue: #6B8AFF;
   --radius: 16px;
@@ -76,7 +76,7 @@ body {
 
 .btn--primary {
   background: var(--accent);
-  color: #0A0A0A;
+  color: #FFFFFF;
 }
 
 .btn--primary:hover {
@@ -88,7 +88,7 @@ body {
 .btn--waitlist {
   background: transparent;
   color: var(--accent);
-  border: 1px solid rgba(201, 168, 76, 0.3);
+  border: 1px solid rgba(59, 130, 246, 0.3);
   padding: 12px 24px;
   font-size: 1rem;
   margin-top: 12px;
@@ -101,7 +101,7 @@ body {
 
 .btn--submit {
   background: var(--accent);
-  color: #0A0A0A;
+  color: #FFFFFF;
   width: 100%;
   justify-content: center;
   padding: 18px 36px;
@@ -178,7 +178,7 @@ body {
   left: -50%;
   width: 200%;
   height: 200%;
-  background: radial-gradient(ellipse at 50% 30%, rgba(201, 168, 76, 0.06) 0%, transparent 60%);
+  background: radial-gradient(ellipse at 50% 30%, rgba(59, 130, 246, 0.06) 0%, transparent 60%);
   pointer-events: none;
 }
 
@@ -309,7 +309,7 @@ body {
 }
 
 .product-card:hover {
-  border-color: rgba(201, 168, 76, 0.2);
+  border-color: rgba(59, 130, 246, 0.2);
 }
 
 /* --- Phone Mockup --- */
@@ -393,7 +393,7 @@ body {
 }
 
 .chat-bubble--ai {
-  background: rgba(201, 168, 76, 0.1);
+  background: rgba(59, 130, 246, 0.1);
   color: var(--text);
   border-bottom-left-radius: 4px;
   align-self: flex-start;
@@ -512,7 +512,7 @@ body {
 }
 
 .card:hover {
-  border-color: rgba(201, 168, 76, 0.2);
+  border-color: rgba(59, 130, 246, 0.2);
   transform: translateY(-4px);
   box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
 }
@@ -534,8 +534,8 @@ body {
 }
 
 .card--dementia .card-visual {
-  background: radial-gradient(ellipse at 30% 20%, #C9A84C 0%, transparent 60%),
-              radial-gradient(ellipse at 70% 80%, #8B6914 0%, transparent 50%);
+  background: radial-gradient(ellipse at 30% 20%, #F59E0B 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 80%, #D97706 0%, transparent 50%);
 }
 
 .card--apraxia .card-visual {
@@ -556,6 +556,11 @@ body {
 .card--stroke .card-visual {
   background: radial-gradient(ellipse at 50% 20%, #F97316 0%, transparent 60%),
               radial-gradient(ellipse at 40% 80%, #DC2626 0%, transparent 50%);
+}
+
+.card--pediatrics .card-visual {
+  background: radial-gradient(ellipse at 40% 30%, #8B5CF6 0%, transparent 60%),
+              radial-gradient(ellipse at 60% 70%, #6366F1 0%, transparent 50%);
 }
 
 .card-body {
@@ -624,8 +629,123 @@ body {
 .card-desc {
   color: var(--text-muted);
   font-size: 1.15rem;
-  margin-bottom: 16px;
+  margin-bottom: 8px;
   flex-grow: 1;
+}
+
+.card-for {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--accent);
+  opacity: 0.7;
+  margin-bottom: 16px;
+  letter-spacing: 0.02em;
+}
+
+/* ═══════════════════════════════════════════
+   THE PLATFORM
+   ═══════════════════════════════════════════ */
+.platform {
+  padding: 120px 24px;
+}
+
+.platform-layout {
+  display: flex;
+  align-items: center;
+  gap: 80px;
+}
+
+.platform-text {
+  flex: 1;
+}
+
+.platform-desc {
+  color: var(--text-muted);
+  font-size: 1.3rem;
+  line-height: 1.8;
+  margin-bottom: 20px;
+}
+
+.platform-desc--accent {
+  color: var(--accent);
+  font-weight: 700;
+  font-size: 1.4rem;
+}
+
+.platform-diagram {
+  flex-shrink: 0;
+  width: 320px;
+  height: 320px;
+  position: relative;
+}
+
+.diagram-hub {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 100px;
+  height: 100px;
+  background: var(--accent);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1rem;
+  color: #FFFFFF;
+  z-index: 2;
+  box-shadow: 0 0 40px rgba(59, 130, 246, 0.3);
+}
+
+.diagram-spokes {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+.diagram-spoke {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 120px;
+  margin-left: -60px;
+  margin-top: -18px;
+  transform-origin: center center;
+  transform: rotate(var(--angle)) translateY(-130px);
+}
+
+.diagram-spoke span {
+  display: block;
+  transform: rotate(calc(-1 * var(--angle)));
+  background: var(--bg-card);
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 100px;
+  padding: 8px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-align: center;
+  white-space: nowrap;
+}
+
+@media (max-width: 900px) {
+  .platform-layout {
+    flex-direction: column;
+    gap: 48px;
+  }
+
+  .platform-diagram {
+    width: 280px;
+    height: 280px;
+  }
+
+  .diagram-spoke {
+    transform: rotate(var(--angle)) translateY(-110px);
+  }
 }
 
 /* ═══════════════════════════════════════════
@@ -648,7 +768,7 @@ body {
   left: 0;
   width: 100%;
   height: 100%;
-  background: radial-gradient(ellipse at 50% 50%, rgba(201, 168, 76, 0.04) 0%, transparent 70%);
+  background: radial-gradient(ellipse at 50% 50%, rgba(59, 130, 246, 0.04) 0%, transparent 70%);
   pointer-events: none;
 }
 

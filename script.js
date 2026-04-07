@@ -64,14 +64,14 @@ gsap.registerPlugin(ScrollTrigger);
 
       ctx.beginPath();
       ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(201, 168, 76, ${alpha})`;
+      ctx.fillStyle = `rgba(59, 130, 246, ${alpha})`;
       ctx.fill();
 
       // Soft glow on brighter stars
       if (s.r > 1) {
         ctx.beginPath();
         ctx.arc(s.x, s.y, s.r * 3, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(201, 168, 76, ${alpha * 0.1})`;
+        ctx.fillStyle = `rgba(59, 130, 246, ${alpha * 0.1})`;
         ctx.fill();
       }
 
@@ -163,6 +163,43 @@ gsap.from('.coming-soon .section-title', {
   scrollTrigger: {
     trigger: '.coming-soon .section-title',
     start: 'top 85%',
+    toggleActions: 'play none none none',
+  },
+});
+
+// --- Platform section ---
+gsap.from('.platform .section-title', {
+  opacity: 0,
+  y: 30,
+  duration: 0.8,
+  ease: 'power2.out',
+  scrollTrigger: {
+    trigger: '.platform',
+    start: 'top 85%',
+    toggleActions: 'play none none none',
+  },
+});
+
+gsap.from('.platform-text', {
+  opacity: 0,
+  x: -30,
+  duration: 0.9,
+  ease: 'power2.out',
+  scrollTrigger: {
+    trigger: '.platform-layout',
+    start: 'top 80%',
+    toggleActions: 'play none none none',
+  },
+});
+
+gsap.from('.platform-diagram', {
+  opacity: 0,
+  scale: 0.8,
+  duration: 1,
+  ease: 'power3.out',
+  scrollTrigger: {
+    trigger: '.platform-layout',
+    start: 'top 80%',
     toggleActions: 'play none none none',
   },
 });
