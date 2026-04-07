@@ -346,7 +346,7 @@ gsap.from('.waitlist-inner', {
 // WAITLIST FORM — Supabase
 // ═══════════════════════════════════════════
 const SUPABASE_URL = 'https://zgdjxqaainynovabvprb.supabase.co';
-const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpnZGp4cWFhaW55bm92YWJ2cHJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzU4NTY2MTMsImV4cCI6MjA1MTQzMjYxM30.jnMQjGeLMVZCq-vhVR_K7mEaOYwVAGjS3OTAV92gAYY';
+const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpnZGp4cWFhaW55bm92YWJ2cHJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY4MTM4MjcsImV4cCI6MjA2MjM4OTgyN30.nm6e9Ojlwf_PwrcngGWEzaRbZB1eMazlEn_xVNCr-Y4';
 
 const form = document.getElementById('waitlist-form');
 const message = document.getElementById('form-message');
@@ -389,6 +389,7 @@ form.addEventListener('submit', async (e) => {
       form.reset();
     } else {
       const err = await res.json();
+      console.error('Waitlist error:', res.status, err);
       if (err.code === '23505') {
         showMessage("You're already on the waitlist!", 'success');
       } else {
