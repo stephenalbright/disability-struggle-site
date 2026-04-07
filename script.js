@@ -1,5 +1,5 @@
 /* ═══════════════════════════════════════════
-   DISABILITY STRUGGLE — ANIMATIONS & LOGIC
+   DISABILITY DRIVEN — ANIMATIONS & LOGIC
    ═══════════════════════════════════════════ */
 
 gsap.registerPlugin(ScrollTrigger);
