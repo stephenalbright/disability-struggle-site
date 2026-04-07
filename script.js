@@ -5,16 +5,16 @@
 gsap.registerPlugin(ScrollTrigger);
 
 // ═══════════════════════════════════════════
-// HERO STAR FIELD
+// HERO — GRADIENT MESH + PARTICLES
 // ═══════════════════════════════════════════
-(function initStarField() {
+(function initHeroBackground() {
   const canvas = document.getElementById('hero-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
 
-  let w, h, stars;
-  const STAR_COUNT = 200;
-  const SPEED = 0.15;
+  let w, h, particles, meshPoints;
+  const PARTICLE_COUNT = 120;
+  const MESH_POINTS = 5;
 
   function resize() {
     w = canvas.width = canvas.offsetWidth * devicePixelRatio;
@@ -22,19 +22,40 @@ gsap.registerPlugin(ScrollTrigger);
     ctx.scale(devicePixelRatio, devicePixelRatio);
   }
 
-  function createStars() {
-    stars = [];
+  function createMeshPoints() {
+    meshPoints = [];
     const cw = canvas.offsetWidth;
     const ch = canvas.offsetHeight;
-    for (let i = 0; i < STAR_COUNT; i++) {
-      stars.push({
+    for (let i = 0; i < MESH_POINTS; i++) {
+      meshPoints.push({
         x: Math.random() * cw,
         y: Math.random() * ch,
-        r: Math.random() * 1.5 + 0.3,
-        alpha: Math.random() * 0.6 + 0.1,
-        drift: (Math.random() - 0.5) * SPEED,
-        twinkleSpeed: Math.random() * 0.02 + 0.005,
+        vx: (Math.random() - 0.5) * 0.3,
+        vy: (Math.random() - 0.5) * 0.3,
+        radius: cw * (0.3 + Math.random() * 0.4),
+        hue: 210 + Math.random() * 30,
+        saturation: 70 + Math.random() * 20,
+        lightness: 40 + Math.random() * 15,
+        alpha: 0.03 + Math.random() * 0.04,
+      });
+    }
+  }
+
+  function createParticles() {
+    particles = [];
+    const cw = canvas.offsetWidth;
+    const ch = canvas.offsetHeight;
+    for (let i = 0; i < PARTICLE_COUNT; i++) {
+      particles.push({
+        x: Math.random() * cw,
+        y: Math.random() * ch,
+        r: Math.random() * 2 + 0.5,
+        alpha: Math.random() * 0.5 + 0.1,
+        vx: (Math.random() - 0.5) * 0.2,
+        vy: -Math.random() * 0.3 - 0.05,
+        twinkleSpeed: Math.random() * 0.015 + 0.005,
         twinklePhase: Math.random() * Math.PI * 2,
+        life: Math.random(),
       });
     }
   }
@@ -45,39 +66,64 @@ gsap.registerPlugin(ScrollTrigger);
     const ch = canvas.offsetHeight;
     ctx.clearRect(0, 0, cw, ch);
 
-    // Animated gradient background
-    const t = frame * 0.003;
-    const grd = ctx.createRadialGradient(
-      cw * (0.5 + 0.2 * Math.sin(t)), ch * (0.3 + 0.1 * Math.cos(t * 0.7)), 0,
-      cw * 0.5, ch * 0.5, cw * 0.8
-    );
-    grd.addColorStop(0, 'rgba(15, 25, 50, 0.3)');
-    grd.addColorStop(0.5, 'rgba(10, 10, 10, 0.1)');
-    grd.addColorStop(1, 'transparent');
-    ctx.fillStyle = grd;
-    ctx.fillRect(0, 0, cw, ch);
+    // Animated gradient mesh
+    for (const mp of meshPoints) {
+      mp.x += mp.vx;
+      mp.y += mp.vy;
+      if (mp.x < -mp.radius * 0.5 || mp.x > cw + mp.radius * 0.5) mp.vx *= -1;
+      if (mp.y < -mp.radius * 0.5 || mp.y > ch + mp.radius * 0.5) mp.vy *= -1;
 
-    // Stars
-    for (const s of stars) {
-      const twinkle = Math.sin(frame * s.twinkleSpeed + s.twinklePhase);
-      const alpha = s.alpha * (0.5 + 0.5 * twinkle);
+      const breathe = 1 + 0.15 * Math.sin(frame * 0.008 + mp.hue);
+      const grd = ctx.createRadialGradient(mp.x, mp.y, 0, mp.x, mp.y, mp.radius * breathe);
+      grd.addColorStop(0, `hsla(${mp.hue}, ${mp.saturation}%, ${mp.lightness}%, ${mp.alpha})`);
+      grd.addColorStop(0.5, `hsla(${mp.hue}, ${mp.saturation}%, ${mp.lightness}%, ${mp.alpha * 0.3})`);
+      grd.addColorStop(1, 'transparent');
+      ctx.fillStyle = grd;
+      ctx.fillRect(0, 0, cw, ch);
+    }
+
+    // Particles
+    for (const p of particles) {
+      const twinkle = Math.sin(frame * p.twinkleSpeed + p.twinklePhase);
+      const alpha = p.alpha * (0.4 + 0.6 * twinkle);
 
       ctx.beginPath();
-      ctx.arc(s.x, s.y, s.r, 0, Math.PI * 2);
-      ctx.fillStyle = `rgba(59, 130, 246, ${alpha})`;
+      ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+      ctx.fillStyle = `rgba(59, 130, 246, ${Math.max(0, alpha)})`;
       ctx.fill();
 
-      // Soft glow on brighter stars
-      if (s.r > 1) {
+      // Soft glow on larger particles
+      if (p.r > 1.2) {
         ctx.beginPath();
-        ctx.arc(s.x, s.y, s.r * 3, 0, Math.PI * 2);
-        ctx.fillStyle = `rgba(59, 130, 246, ${alpha * 0.1})`;
+        ctx.arc(p.x, p.y, p.r * 4, 0, Math.PI * 2);
+        ctx.fillStyle = `rgba(59, 130, 246, ${Math.max(0, alpha * 0.08)})`;
         ctx.fill();
       }
 
-      s.y += s.drift;
-      if (s.y < -5) s.y = ch + 5;
-      if (s.y > ch + 5) s.y = -5;
+      p.x += p.vx;
+      p.y += p.vy;
+
+      // Wrap around
+      if (p.y < -10) { p.y = ch + 10; p.x = Math.random() * cw; }
+      if (p.x < -10) p.x = cw + 10;
+      if (p.x > cw + 10) p.x = -10;
+    }
+
+    // Subtle connecting lines between nearby particles
+    ctx.strokeStyle = 'rgba(59, 130, 246, 0.03)';
+    ctx.lineWidth = 0.5;
+    for (let i = 0; i < particles.length; i++) {
+      for (let j = i + 1; j < particles.length; j++) {
+        const dx = particles[i].x - particles[j].x;
+        const dy = particles[i].y - particles[j].y;
+        const dist = dx * dx + dy * dy;
+        if (dist < 15000) {
+          ctx.beginPath();
+          ctx.moveTo(particles[i].x, particles[i].y);
+          ctx.lineTo(particles[j].x, particles[j].y);
+          ctx.stroke();
+        }
+      }
     }
 
     frame++;
@@ -85,9 +131,10 @@ gsap.registerPlugin(ScrollTrigger);
   }
 
   resize();
-  createStars();
+  createMeshPoints();
+  createParticles();
   draw();
-  window.addEventListener('resize', () => { resize(); createStars(); });
+  window.addEventListener('resize', () => { resize(); createMeshPoints(); createParticles(); });
 })();
 
 // --- Hero entrance sequence ---
@@ -98,8 +145,32 @@ heroTl
   .to('.hero-tagline', { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, '-=0.3')
   .to('.scroll-indicator', { opacity: 1, duration: 0.6, ease: 'power2.out' }, '-=0.2');
 
+// ═══════════════════════════════════════════
+// COUNTER ANIMATION — Problem Stats
+// ═══════════════════════════════════════════
+function animateCounter(el) {
+  const target = parseInt(el.dataset.count, 10);
+  if (!target) return;
+
+  const countSpan = el.querySelector('.count-number');
+  if (!countSpan) return;
+
+  const duration = 2;
+  const obj = { val: 0 };
+
+  gsap.to(obj, {
+    val: target,
+    duration: duration,
+    ease: 'power2.out',
+    onUpdate() {
+      countSpan.textContent = Math.round(obj.val).toLocaleString();
+    },
+  });
+}
+
 // --- Problem stats: each line fades in on scroll ---
 document.querySelectorAll('[data-problem]').forEach((el) => {
+  gsap.set(el, { y: 30 });
   gsap.to(el, {
     opacity: 1,
     y: 0,
@@ -110,8 +181,10 @@ document.querySelectorAll('[data-problem]').forEach((el) => {
       start: 'top 80%',
       toggleActions: 'play none none none',
     },
+    onStart() {
+      if (el.dataset.count) animateCounter(el);
+    },
   });
-  gsap.set(el, { y: 30 });
 });
 
 // --- Product card + phone mockup: slides up ---
@@ -204,51 +277,6 @@ gsap.from('.platform-diagram', {
   },
 });
 
-// --- Vision: lines reveal with scale ---
-document.querySelectorAll('[data-vision]').forEach((el, i) => {
-  gsap.to(el, {
-    opacity: 1,
-    y: 0,
-    scale: 1,
-    duration: 0.9,
-    delay: i * 0.15,
-    ease: 'power3.out',
-    scrollTrigger: {
-      trigger: '.vision-inner',
-      start: 'top 75%',
-      toggleActions: 'play none none none',
-    },
-  });
-  gsap.set(el, { y: 20, scale: 0.97 });
-});
-
-// --- About section ---
-gsap.from('.about-content', {
-  opacity: 0,
-  y: 40,
-  duration: 0.9,
-  ease: 'power2.out',
-  scrollTrigger: {
-    trigger: '.about',
-    start: 'top 80%',
-    toggleActions: 'play none none none',
-  },
-});
-
-// --- Credentials: stagger in ---
-gsap.to('[data-cred]', {
-  opacity: 1,
-  y: 0,
-  duration: 0.6,
-  ease: 'power2.out',
-  stagger: 0.1,
-  scrollTrigger: {
-    trigger: '.cred-row',
-    start: 'top 85%',
-    toggleActions: 'play none none none',
-  },
-});
-
 // --- Built Different: stagger in ---
 gsap.from('.built-different .section-title', {
   opacity: 0,
@@ -270,6 +298,33 @@ gsap.to('[data-diff]', {
   stagger: 0.15,
   scrollTrigger: {
     trigger: '.diff-grid',
+    start: 'top 80%',
+    toggleActions: 'play none none none',
+  },
+});
+
+// --- Credentials: stagger in ---
+gsap.to('[data-cred]', {
+  opacity: 1,
+  y: 0,
+  duration: 0.6,
+  ease: 'power2.out',
+  stagger: 0.1,
+  scrollTrigger: {
+    trigger: '.cred-row',
+    start: 'top 85%',
+    toggleActions: 'play none none none',
+  },
+});
+
+// --- About section ---
+gsap.from('.about-content', {
+  opacity: 0,
+  y: 40,
+  duration: 0.9,
+  ease: 'power2.out',
+  scrollTrigger: {
+    trigger: '.about',
     start: 'top 80%',
     toggleActions: 'play none none none',
   },

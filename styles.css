@@ -136,15 +136,23 @@ body {
 .badge--live {
   background: rgba(34, 197, 94, 0.15);
   color: var(--live-green);
+  box-shadow: 0 0 12px rgba(34, 197, 94, 0.3), 0 0 24px rgba(34, 197, 94, 0.1);
+  animation: live-glow 2.5s ease-in-out infinite;
 }
 
 .badge--live::before {
   content: '';
-  width: 6px;
-  height: 6px;
+  width: 8px;
+  height: 8px;
   border-radius: 50%;
   background: var(--live-green);
+  box-shadow: 0 0 6px var(--live-green);
   animation: pulse-dot 2s ease-in-out infinite;
+}
+
+@keyframes live-glow {
+  0%, 100% { box-shadow: 0 0 12px rgba(34, 197, 94, 0.3), 0 0 24px rgba(34, 197, 94, 0.1); }
+  50% { box-shadow: 0 0 20px rgba(34, 197, 94, 0.5), 0 0 40px rgba(34, 197, 94, 0.2); }
 }
 
 .badge--soon {
@@ -153,8 +161,8 @@ body {
 }
 
 @keyframes pulse-dot {
-  0%, 100% { opacity: 1; }
-  50% { opacity: 0.4; }
+  0%, 100% { opacity: 1; transform: scale(1); }
+  50% { opacity: 0.4; transform: scale(0.8); }
 }
 
 /* ═══════════════════════════════════════════
@@ -280,6 +288,10 @@ body {
   font-size: clamp(3.5rem, 8vw, 72px);
 }
 
+.count-number {
+  font-variant-numeric: tabular-nums;
+}
+
 /* ═══════════════════════════════════════════
    APHASIAGPT — LIVE PRODUCT
    ═══════════════════════════════════════════ */
@@ -291,8 +303,8 @@ body {
   display: flex;
   align-items: center;
   justify-content: center;
-  gap: 60px;
-  max-width: 1000px;
+  gap: 80px;
+  max-width: 1100px;
   margin: 0 auto;
 }
 
@@ -320,24 +332,25 @@ body {
 }
 
 .phone-frame {
-  width: 280px;
-  height: 560px;
+  width: 320px;
+  height: 640px;
   background: #1A1A1A;
-  border-radius: 40px;
+  border-radius: 44px;
   border: 3px solid rgba(255, 255, 255, 0.1);
-  padding: 12px;
+  padding: 14px;
   position: relative;
   box-shadow:
     0 0 0 1px rgba(255, 255, 255, 0.05),
-    0 20px 60px rgba(0, 0, 0, 0.5),
+    0 25px 80px rgba(0, 0, 0, 0.6),
+    0 0 60px rgba(59, 130, 246, 0.08),
     inset 0 1px 0 rgba(255, 255, 255, 0.05);
 }
 
 .phone-notch {
-  width: 100px;
-  height: 28px;
+  width: 110px;
+  height: 30px;
   background: #1A1A1A;
-  border-radius: 0 0 16px 16px;
+  border-radius: 0 0 18px 18px;
   margin: 0 auto;
   position: relative;
   z-index: 2;
@@ -345,7 +358,7 @@ body {
 
 .phone-screen {
   background: #0F0F0F;
-  border-radius: 28px;
+  border-radius: 30px;
   height: 100%;
   display: flex;
   flex-direction: column;
@@ -354,37 +367,37 @@ body {
 }
 
 .screen-header {
-  padding: 40px 20px 16px;
+  padding: 44px 24px 18px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
 }
 
 .screen-logo {
   font-family: var(--font-display);
-  font-size: 1.1rem;
+  font-size: 1.2rem;
   font-weight: 800;
   color: var(--accent);
 }
 
 .screen-chat {
   flex: 1;
-  padding: 16px;
+  padding: 20px;
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 14px;
   overflow: hidden;
 }
 
 .chat-bubble {
-  padding: 12px 16px;
-  border-radius: 16px;
-  font-size: 0.8rem;
+  padding: 14px 18px;
+  border-radius: 18px;
+  font-size: 0.85rem;
   line-height: 1.5;
   max-width: 85%;
 }
 
 .chat-label {
   display: block;
-  font-size: 0.65rem;
+  font-size: 0.7rem;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 0.05em;
@@ -407,23 +420,23 @@ body {
 }
 
 .screen-input {
-  padding: 12px 16px;
+  padding: 14px 18px;
   border-top: 1px solid rgba(255, 255, 255, 0.06);
   display: flex;
   align-items: center;
-  gap: 8px;
+  gap: 10px;
 }
 
 .input-placeholder {
   flex: 1;
-  font-size: 0.75rem;
+  font-size: 0.8rem;
   color: var(--text-muted);
   opacity: 0.5;
 }
 
 .input-mic {
-  width: 28px;
-  height: 28px;
+  width: 32px;
+  height: 32px;
   color: var(--accent);
 }
 
@@ -439,8 +452,8 @@ body {
   }
 
   .phone-frame {
-    width: 240px;
-    height: 480px;
+    width: 260px;
+    height: 520px;
   }
 }
 
@@ -533,9 +546,9 @@ body {
   z-index: 0;
 }
 
-.card--dementia .card-visual {
-  background: radial-gradient(ellipse at 30% 20%, #F59E0B 0%, transparent 60%),
-              radial-gradient(ellipse at 70% 80%, #D97706 0%, transparent 50%);
+.card--stroke .card-visual {
+  background: radial-gradient(ellipse at 50% 20%, #F97316 0%, transparent 60%),
+              radial-gradient(ellipse at 40% 80%, #DC2626 0%, transparent 50%);
 }
 
 .card--apraxia .card-visual {
@@ -543,24 +556,28 @@ body {
               radial-gradient(ellipse at 20% 70%, #4F46E5 0%, transparent 50%);
 }
 
-.card--als .card-visual {
-  background: radial-gradient(ellipse at 60% 40%, #22C55E 0%, transparent 60%),
-              radial-gradient(ellipse at 30% 80%, #059669 0%, transparent 50%);
-}
-
 .card--tbi .card-visual {
   background: radial-gradient(ellipse at 40% 30%, #EC4899 0%, transparent 60%),
               radial-gradient(ellipse at 70% 70%, #9333EA 0%, transparent 50%);
 }
 
-.card--stroke .card-visual {
-  background: radial-gradient(ellipse at 50% 20%, #F97316 0%, transparent 60%),
-              radial-gradient(ellipse at 40% 80%, #DC2626 0%, transparent 50%);
+.card--autism .card-visual {
+  background: radial-gradient(ellipse at 40% 30%, #14B8A6 0%, transparent 60%),
+              radial-gradient(ellipse at 70% 70%, #0D9488 0%, transparent 50%);
 }
 
 .card--pediatrics .card-visual {
   background: radial-gradient(ellipse at 40% 30%, #8B5CF6 0%, transparent 60%),
               radial-gradient(ellipse at 60% 70%, #6366F1 0%, transparent 50%);
+}
+
+.card--more .card-visual {
+  background: radial-gradient(ellipse at 50% 50%, rgba(255, 255, 255, 0.03) 0%, transparent 60%);
+}
+
+.card--more {
+  border-style: dashed;
+  border-color: rgba(255, 255, 255, 0.1);
 }
 
 .card-body {
@@ -569,21 +586,11 @@ body {
   padding: 36px 28px;
 }
 
-.card--mystery {
-  border-style: dashed;
-  border-color: rgba(255, 255, 255, 0.1);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  text-align: center;
-}
-
-.card--mystery .card-body {
+.card-body--more {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 100%;
+  text-align: center;
 }
 
 .card-icon {
@@ -746,63 +753,6 @@ body {
   .diagram-spoke {
     transform: rotate(var(--angle)) translateY(-110px);
   }
-}
-
-/* ═══════════════════════════════════════════
-   THE VISION
-   ═══════════════════════════════════════════ */
-.vision {
-  min-height: 80vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 120px 24px;
-  position: relative;
-  overflow: hidden;
-}
-
-.vision::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background: radial-gradient(ellipse at 50% 50%, rgba(59, 130, 246, 0.04) 0%, transparent 70%);
-  pointer-events: none;
-}
-
-.vision-inner {
-  text-align: center;
-  max-width: 1100px;
-  z-index: 1;
-}
-
-.vision-line {
-  font-family: var(--font-display);
-  font-size: clamp(3rem, 8vw, 80px);
-  font-weight: 900;
-  line-height: 1.2;
-  opacity: 0;
-}
-
-.vision-line--accent {
-  color: var(--accent);
-  margin-top: 8px;
-}
-
-.vision-divider {
-  width: 60px;
-  height: 2px;
-  background: var(--accent);
-  margin: 40px auto;
-  opacity: 0;
-}
-
-.vision-sub {
-  font-size: clamp(1.4rem, 3vw, 2rem);
-  color: var(--text-muted);
-  opacity: 0;
 }
 
 /* ═══════════════════════════════════════════

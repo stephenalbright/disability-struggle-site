@@ -51,7 +51,9 @@
   <!-- ═══════════════════════════════════════════ -->
   <section id="problem" class="problem">
     <div class="problem-inner">
-      <p class="problem-stat" data-problem>70 million Americans live with a disability.</p>
+      <p class="problem-stat" data-problem data-count="70000000" data-suffix=" Americans live with a disability.">
+        <span class="count-number">70,000,000</span> Americans live with a disability.
+      </p>
       <p class="problem-stat" data-problem>Recovery technology hasn't kept up.</p>
       <p class="problem-stat problem-stat--accent" data-problem>Until now.</p>
     </div>
@@ -124,22 +126,23 @@
       <h2 class="section-title">What's Next</h2>
       <div class="card-grid">
 
-        <div class="card card--dementia" data-card>
+        <div class="card card--stroke" data-card>
           <div class="card-visual" aria-hidden="true"></div>
           <div class="card-body">
             <div class="card-icon card-icon--animated">
               <svg viewBox="0 0 56 56" fill="none" aria-hidden="true">
                 <circle cx="28" cy="28" r="24" stroke="currentColor" stroke-width="1" opacity="0.3"/>
-                <circle cx="28" cy="28" r="16" stroke="currentColor" stroke-width="1" opacity="0.5" class="icon-ring"/>
-                <path d="M28 18v10l7 7" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <circle cx="28" cy="28" r="3" fill="currentColor" class="icon-pulse"/>
+                <path d="M28 12v32" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+                <path d="M22 18a6 6 0 0 1 12 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="icon-ring"/>
+                <path d="M19 28a9 9 0 0 1 18 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="icon-ring"/>
+                <circle cx="28" cy="38" r="3" fill="currentColor" class="icon-pulse"/>
               </svg>
             </div>
-            <h3 class="card-title">Dementia</h3>
-            <p class="card-desc">AI cognitive support for daily living</p>
-            <p class="card-for">For: Caregivers, Family</p>
+            <h3 class="card-title">Stroke Recovery</h3>
+            <p class="card-desc">Comprehensive post-stroke rehab</p>
+            <p class="card-for">For: SLPs, OTs</p>
             <span class="badge badge--soon">Coming Soon</span>
-            <button class="btn btn--waitlist" onclick="scrollToWaitlist('Dementia')">Join Waitlist</button>
+            <button class="btn btn--waitlist" onclick="scrollToWaitlist('Stroke Recovery')">Join Waitlist</button>
           </div>
         </div>
 
@@ -160,26 +163,6 @@
             <p class="card-for">For: SLPs, Pediatrics</p>
             <span class="badge badge--soon">Coming Soon</span>
             <button class="btn btn--waitlist" onclick="scrollToWaitlist('Apraxia')">Join Waitlist</button>
-          </div>
-        </div>
-
-        <div class="card card--als" data-card>
-          <div class="card-visual" aria-hidden="true"></div>
-          <div class="card-body">
-            <div class="card-icon card-icon--animated">
-              <svg viewBox="0 0 56 56" fill="none" aria-hidden="true">
-                <circle cx="28" cy="28" r="24" stroke="currentColor" stroke-width="1" opacity="0.3"/>
-                <path d="M14 28h28" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M20 22l-6 6 6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="icon-ring"/>
-                <path d="M36 22l6 6-6 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="icon-ring"/>
-                <circle cx="28" cy="28" r="3" fill="currentColor" class="icon-pulse"/>
-              </svg>
-            </div>
-            <h3 class="card-title">ALS</h3>
-            <p class="card-desc">Communication tools that adapt as you do</p>
-            <p class="card-for">For: Caregivers, Family</p>
-            <span class="badge badge--soon">Coming Soon</span>
-            <button class="btn btn--waitlist" onclick="scrollToWaitlist('ALS')">Join Waitlist</button>
           </div>
         </div>
 
@@ -205,23 +188,25 @@
           </div>
         </div>
 
-        <div class="card card--stroke" data-card>
+        <div class="card card--autism" data-card>
           <div class="card-visual" aria-hidden="true"></div>
           <div class="card-body">
             <div class="card-icon card-icon--animated">
               <svg viewBox="0 0 56 56" fill="none" aria-hidden="true">
                 <circle cx="28" cy="28" r="24" stroke="currentColor" stroke-width="1" opacity="0.3"/>
-                <path d="M28 12v32" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
-                <path d="M22 18a6 6 0 0 1 12 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="icon-ring"/>
-                <path d="M19 28a9 9 0 0 1 18 0" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="icon-ring"/>
-                <circle cx="28" cy="38" r="3" fill="currentColor" class="icon-pulse"/>
+                <circle cx="28" cy="22" r="6" stroke="currentColor" stroke-width="2"/>
+                <path d="M18 40c0-5 4-10 10-10s10 5 10 10" stroke="currentColor" stroke-width="2" stroke-linecap="round" class="icon-ring"/>
+                <path d="M22 20c-2-3-1-6 1-6s3 3 1 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="icon-pulse" opacity="0.6"/>
+                <path d="M34 20c2-3 1-6-1-6s-3 3-1 6" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" class="icon-pulse" opacity="0.6"/>
+                <circle cx="25" cy="22" r="1.5" fill="currentColor" class="icon-pulse"/>
+                <circle cx="31" cy="22" r="1.5" fill="currentColor" class="icon-pulse"/>
               </svg>
             </div>
-            <h3 class="card-title">Stroke Recovery</h3>
-            <p class="card-desc">Comprehensive post-stroke rehab</p>
-            <p class="card-for">For: SLPs, OTs</p>
+            <h3 class="card-title">Autism</h3>
+            <p class="card-desc">Social communication and behavioral support through AI</p>
+            <p class="card-for">For: BCBAs, Parents, SLPs</p>
             <span class="badge badge--soon">Coming Soon</span>
-            <button class="btn btn--waitlist" onclick="scrollToWaitlist('Stroke Recovery')">Join Waitlist</button>
+            <button class="btn btn--waitlist" onclick="scrollToWaitlist('Autism')">Join Waitlist</button>
           </div>
         </div>
 
@@ -241,6 +226,21 @@
             <p class="card-for">For: SLPs, Parents</p>
             <span class="badge badge--soon">Coming Soon</span>
             <button class="btn btn--waitlist" onclick="scrollToWaitlist('Pediatrics')">Join Waitlist</button>
+          </div>
+        </div>
+
+        <div class="card card--more" data-card>
+          <div class="card-visual" aria-hidden="true"></div>
+          <div class="card-body card-body--more">
+            <div class="card-icon--plus" aria-hidden="true">
+              <svg viewBox="0 0 56 56" fill="none">
+                <circle cx="28" cy="28" r="24" stroke="currentColor" stroke-width="1" opacity="0.3" stroke-dasharray="4 4"/>
+                <path d="M28 18v20M18 28h20" stroke="currentColor" stroke-width="2" stroke-linecap="round"/>
+              </svg>
+            </div>
+            <h3 class="card-title">More Coming</h3>
+            <p class="card-desc">Dementia, ALS, and more conditions on the way.</p>
+            <button class="btn btn--waitlist" onclick="scrollToWaitlist('')">Get Notified</button>
           </div>
         </div>
 
@@ -275,84 +275,14 @@
             </div>
             <div class="diagram-spokes">
               <div class="diagram-spoke" style="--angle: 0deg"><span>Aphasia</span></div>
-              <div class="diagram-spoke" style="--angle: 60deg"><span>Dementia</span></div>
-              <div class="diagram-spoke" style="--angle: 120deg"><span>Apraxia</span></div>
-              <div class="diagram-spoke" style="--angle: 180deg"><span>ALS</span></div>
-              <div class="diagram-spoke" style="--angle: 240deg"><span>TBI</span></div>
-              <div class="diagram-spoke" style="--angle: 300deg"><span>Stroke</span></div>
+              <div class="diagram-spoke" style="--angle: 51deg"><span>Stroke</span></div>
+              <div class="diagram-spoke" style="--angle: 103deg"><span>Apraxia</span></div>
+              <div class="diagram-spoke" style="--angle: 154deg"><span>Autism</span></div>
+              <div class="diagram-spoke" style="--angle: 206deg"><span>TBI</span></div>
+              <div class="diagram-spoke" style="--angle: 257deg"><span>Pediatrics</span></div>
+              <div class="diagram-spoke" style="--angle: 309deg"><span>More</span></div>
             </div>
           </div>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- THE VISION -->
-  <!-- ═══════════════════════════════════════════ -->
-  <section id="vision" class="vision">
-    <div class="vision-inner">
-      <p class="vision-line" data-vision>Aphasia was our starting point.</p>
-      <p class="vision-line vision-line--accent" data-vision>Disability drives everything we build.</p>
-      <div class="vision-divider" data-vision></div>
-      <p class="vision-sub" data-vision>Every condition. Every person. Every stage of recovery.</p>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- FOUNDER STORY -->
-  <!-- ═══════════════════════════════════════════ -->
-  <section id="about" class="about">
-    <div class="container">
-      <div class="about-content">
-        <h2 class="section-title section-title--left">The Story</h2>
-        <p class="about-text">
-          In 2020, Stephen Albright underwent brain surgery and woke up with aphasia —
-          unable to speak, read, or write. The recovery tools available were outdated,
-          inaccessible, and built without the people who needed them most.
-        </p>
-        <p class="about-text">
-          Now a Duke MBA graduating May 2026, Stephen built AphasiaGPT — the first AI
-          speech therapy platform designed for people with aphasia. What started as a
-          personal mission is becoming something bigger. Disability Driven is expanding
-          that vision to every disability.
-        </p>
-        <p class="about-text about-text--accent">
-          Nothing about us, without us.
-        </p>
-      </div>
-    </div>
-  </section>
-
-  <!-- ═══════════════════════════════════════════ -->
-  <!-- CREDIBILITY -->
-  <!-- ═══════════════════════════════════════════ -->
-  <section id="credentials" class="credentials">
-    <div class="container">
-      <div class="cred-row">
-        <div class="cred-badge" data-cred>
-          <span class="cred-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 10h16M4 14h16M12 4v16"/><circle cx="12" cy="12" r="9"/></svg>
-          </span>
-          <span class="cred-text">Duke MBA, Fuqua School of Business</span>
-        </div>
-        <div class="cred-badge" data-cred>
-          <span class="cred-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 2L15 8.5 22 9.5 17 14.5 18 21.5 12 18 6 21.5 7 14.5 2 9.5 9 8.5Z"/></svg>
-          </span>
-          <span class="cred-text">UNC Football, Division 1 Athlete</span>
-        </div>
-        <div class="cred-badge" data-cred>
-          <span class="cred-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 3h18v18H3z"/><path d="M3 9h18M9 3v18"/></svg>
-          </span>
-          <span class="cred-text">Former Financial Analyst, CBRE</span>
-        </div>
-        <div class="cred-badge" data-cred>
-          <span class="cred-icon">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 21c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9z"/><path d="M12 8v4l3 3"/></svg>
-          </span>
-          <span class="cred-text">Personal Aphasia Recovery After Brain Surgery</span>
         </div>
       </div>
     </div>
@@ -399,6 +329,65 @@
   </section>
 
   <!-- ═══════════════════════════════════════════ -->
+  <!-- CREDIBILITY -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section id="credentials" class="credentials">
+    <div class="container">
+      <div class="cred-row">
+        <div class="cred-badge" data-cred>
+          <span class="cred-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M4 10h16M4 14h16M12 4v16"/><circle cx="12" cy="12" r="9"/></svg>
+          </span>
+          <span class="cred-text">Duke MBA, Fuqua School of Business</span>
+        </div>
+        <div class="cred-badge" data-cred>
+          <span class="cred-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 2L15 8.5 22 9.5 17 14.5 18 21.5 12 18 6 21.5 7 14.5 2 9.5 9 8.5Z"/></svg>
+          </span>
+          <span class="cred-text">UNC Football, Division 1 Athlete</span>
+        </div>
+        <div class="cred-badge" data-cred>
+          <span class="cred-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M3 3h18v18H3z"/><path d="M3 9h18M9 3v18"/></svg>
+          </span>
+          <span class="cred-text">Former Financial Analyst, CBRE</span>
+        </div>
+        <div class="cred-badge" data-cred>
+          <span class="cred-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" aria-hidden="true"><path d="M12 21c-4.97 0-9-4.03-9-9s4.03-9 9-9 9 4.03 9 9-4.03 9-9 9z"/><path d="M12 8v4l3 3"/></svg>
+          </span>
+          <span class="cred-text">Personal Aphasia Recovery After Brain Surgery</span>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
+  <!-- FOUNDER STORY -->
+  <!-- ═══════════════════════════════════════════ -->
+  <section id="about" class="about">
+    <div class="container">
+      <div class="about-content">
+        <h2 class="section-title section-title--left">The Story</h2>
+        <p class="about-text">
+          In 2020, Stephen Albright underwent brain surgery and woke up with aphasia —
+          unable to speak, read, or write. The recovery tools available were outdated,
+          inaccessible, and built without the people who needed them most.
+        </p>
+        <p class="about-text">
+          Now a Duke MBA graduating May 2026, Stephen built AphasiaGPT — the first AI
+          speech therapy platform designed for people with aphasia. What started as a
+          personal mission is becoming something bigger. Disability Driven is expanding
+          that vision to every disability.
+        </p>
+        <p class="about-text about-text--accent">
+          Nothing about us, without us.
+        </p>
+      </div>
+    </div>
+  </section>
+
+  <!-- ═══════════════════════════════════════════ -->
   <!-- WAITLIST CTA -->
   <!-- ═══════════════════════════════════════════ -->
   <section id="waitlist" class="waitlist">
@@ -422,12 +411,13 @@
             <label for="waitlist-condition" class="sr-only">Condition of interest</label>
             <select id="waitlist-condition" name="condition">
               <option value="">Select a condition (optional)</option>
-              <option value="Dementia">Dementia</option>
-              <option value="Apraxia">Apraxia</option>
-              <option value="ALS">ALS</option>
-              <option value="TBI">TBI</option>
               <option value="Stroke Recovery">Stroke Recovery</option>
+              <option value="Apraxia">Apraxia</option>
+              <option value="TBI">TBI</option>
+              <option value="Autism">Autism</option>
               <option value="Pediatrics">Pediatrics</option>
+              <option value="Dementia">Dementia</option>
+              <option value="ALS">ALS</option>
               <option value="Aphasia">Aphasia</option>
               <option value="Other">Other</option>
             </select>
