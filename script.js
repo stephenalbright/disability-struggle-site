@@ -350,6 +350,7 @@ const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBh
 
 const form = document.getElementById('waitlist-form');
 const message = document.getElementById('form-message');
+let lastSignupEmail = '';
 
 form.addEventListener('submit', async (e) => {
   e.preventDefault();
@@ -384,14 +385,28 @@ form.addEventListener('submit', async (e) => {
       }),
     });
 
-    if (res.ok) {
-      showMessage("You're on the list! We'll be in touch.", 'success');
+    if (res.ok || (res.status === 409)) {
+      const isDupe = res.status === 409;
+      if (!isDupe) {
+        showMessage("You're on the list! We'll be in touch.", 'success');
+      }
+      if (isDupe) {
+        const err = await res.json();
+        if (err.code === '23505') {
+          showMessage("You're already on the waitlist!", 'success');
+        }
+      }
+      lastSignupEmail = email;
       form.reset();
+      showFeedbackFollowup();
     } else {
       const err = await res.json();
       console.error('Waitlist error:', res.status, err);
       if (err.code === '23505') {
         showMessage("You're already on the waitlist!", 'success');
+        lastSignupEmail = email;
+        form.reset();
+        showFeedbackFollowup();
       } else {
         showMessage('Something went wrong. Please try again.', 'error');
       }
@@ -408,6 +423,75 @@ form.addEventListener('submit', async (e) => {
 function showMessage(text, type) {
   message.textContent = text;
   message.className = `form-message form-message--${type}`;
+}
+
+// ═══════════════════════════════════════════
+// FEEDBACK FOLLOW-UP
+// ═══════════════════════════════════════════
+function showFeedbackFollowup() {
+  const followup = document.getElementById('feedback-followup');
+  if (!followup) return;
+  followup.hidden = false;
+  gsap.fromTo(followup,
+    { opacity: 0, y: 20 },
+    { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }
+  );
+}
+
+const feedbackBtn = document.getElementById('feedback-submit');
+if (feedbackBtn) {
+  feedbackBtn.addEventListener('click', async () => {
+    const textarea = document.getElementById('feedback-text');
+    const feedbackMsg = document.getElementById('feedback-message');
+    const feedback = textarea.value.trim();
+    const btnText = feedbackBtn.querySelector('.btn-text');
+    const btnLoading = feedbackBtn.querySelector('.btn-loading');
+
+    if (!feedback) {
+      feedbackMsg.textContent = 'Write something first!';
+      feedbackMsg.className = 'form-message form-message--error';
+      return;
+    }
+
+    feedbackBtn.disabled = true;
+    btnText.hidden = true;
+    btnLoading.hidden = false;
+
+    try {
+      const res = await fetch(
+        `${SUPABASE_URL}/rest/v1/ds_waitlist?email=eq.${encodeURIComponent(lastSignupEmail)}`,
+        {
+          method: 'PATCH',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Prefer': 'return=minimal',
+          },
+          body: JSON.stringify({ feedback }),
+        }
+      );
+
+      if (res.ok) {
+        feedbackMsg.textContent = 'Thanks! This helps us build what matters.';
+        feedbackMsg.className = 'form-message form-message--success';
+        textarea.disabled = true;
+        feedbackBtn.hidden = true;
+      } else {
+        const err = await res.json();
+        console.error('Feedback error:', res.status, err);
+        feedbackMsg.textContent = 'Could not save feedback. Try again.';
+        feedbackMsg.className = 'form-message form-message--error';
+      }
+    } catch {
+      feedbackMsg.textContent = 'Network error. Try again.';
+      feedbackMsg.className = 'form-message form-message--error';
+    } finally {
+      feedbackBtn.disabled = false;
+      btnText.hidden = false;
+      btnLoading.hidden = true;
+    }
+  });
 }
 
 // ═══════════════════════════════════════════

@@ -396,6 +396,20 @@
           </button>
           <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
         </form>
+        <div id="feedback-followup" class="feedback-followup" hidden>
+          <p class="feedback-prompt">What would you want us to build for you?</p>
+          <textarea
+            id="feedback-text"
+            class="feedback-textarea"
+            placeholder="Tell us what tools or features would help most..."
+            rows="4"
+          ></textarea>
+          <button id="feedback-submit" class="btn btn--submit feedback-btn">
+            <span class="btn-text">Submit Feedback</span>
+            <span class="btn-loading" hidden>Sending...</span>
+          </button>
+          <p id="feedback-message" class="form-message" role="status" aria-live="polite"></p>
+        </div>
       </div>
     </div>
   </section>
