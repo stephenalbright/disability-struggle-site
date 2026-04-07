@@ -99,6 +99,32 @@ gsap.from('.about-content', {
   },
 });
 
+// --- Built Different: stagger in ---
+gsap.from('.built-different .section-title', {
+  opacity: 0,
+  y: 30,
+  duration: 0.8,
+  ease: 'power2.out',
+  scrollTrigger: {
+    trigger: '.built-different .section-title',
+    start: 'top 85%',
+    toggleActions: 'play none none none',
+  },
+});
+
+gsap.to('[data-diff]', {
+  opacity: 1,
+  y: 0,
+  duration: 0.8,
+  ease: 'power2.out',
+  stagger: 0.15,
+  scrollTrigger: {
+    trigger: '.diff-grid',
+    start: 'top 80%',
+    toggleActions: 'play none none none',
+  },
+});
+
 // --- Waitlist section ---
 gsap.from('.waitlist-inner', {
   opacity: 0,
