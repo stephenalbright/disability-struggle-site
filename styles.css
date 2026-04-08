@@ -228,13 +228,24 @@ body {
   background-clip: text;
 }
 
-.hero-tagline {
-  font-size: clamp(1.5rem, 3.5vw, 2.4rem);
-  color: var(--accent);
-  font-weight: 600;
-  margin-top: 20px;
+.hero-mission {
+  font-size: clamp(1.8rem, 4vw, 3rem);
+  color: var(--text);
+  font-weight: 700;
+  margin-top: 24px;
   opacity: 0;
-  letter-spacing: 0.02em;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+}
+
+.hero-tagline {
+  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
+  color: var(--accent);
+  font-weight: 500;
+  margin-top: 12px;
+  opacity: 0;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
 }
 
 .scroll-indicator {
