@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join the Waitlist — Disability Driven</title>
+  <meta name="description" content="Join the Disability Driven waitlist. Pick the condition that matters to you.">
+  <meta property="og:title" content="Join the Waitlist — Disability Driven">
+  <meta property="og:description" content="AI-powered recovery tools for every disability. Sign up for early access.">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
+
+    :root {
+      --bg: #0A0A0A;
+      --bg-card: #141414;
+      --bg-card-hover: #1A1A1A;
+      --text: #F5F5F5;
+      --text-muted: #9A9A9A;
+      --accent: #2563EB;
+      --accent-light: #3B82F6;
+      --accent-glow: rgba(37, 99, 235, 0.2);
+      --live-green: #22C55E;
+      --next-amber: #F59E0B;
+      --radius: 16px;
+      --radius-sm: 8px;
+      --font: 'DM Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+    }
+
+    html { scroll-behavior: smooth; -webkit-font-smoothing: antialiased; }
+    body { font-family: var(--font); background: var(--bg); color: var(--text); line-height: 1.6; min-height: 100vh; }
+
+    .page { max-width: 720px; margin: 0 auto; padding: 48px 24px 80px; }
+
+    .back-link {
+      display: inline-flex; align-items: center; gap: 8px;
+      color: var(--text-muted); text-decoration: none; font-size: 14px;
+      margin-bottom: 40px; transition: color 0.2s;
+    }
+    .back-link:hover { color: var(--text); }
+    .back-link svg { width: 16px; height: 16px; }
+
+    h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; margin-bottom: 8px; }
+    .subtitle { color: var(--text-muted); font-size: 1.1rem; margin-bottom: 40px; }
+
+    /* Condition cards */
+    .conditions { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 12px; margin-bottom: 40px; }
+
+    .condition-card {
+      background: var(--bg-card); border: 2px solid transparent; border-radius: var(--radius-sm);
+      padding: 20px 16px; cursor: pointer; transition: all 0.2s; position: relative; text-align: center;
+    }
+    .condition-card:hover { background: var(--bg-card-hover); border-color: rgba(255,255,255,0.1); }
+    .condition-card.selected { border-color: var(--accent); background: var(--accent-glow); }
+    .condition-card .name { font-weight: 600; font-size: 1rem; margin-bottom: 4px; }
+    .condition-card .badge {
+      display: inline-block; font-size: 11px; font-weight: 700; text-transform: uppercase;
+      letter-spacing: 0.08em; padding: 2px 8px; border-radius: 4px; margin-top: 6px;
+    }
+    .badge-live { background: rgba(34, 197, 94, 0.15); color: var(--live-green); }
+    .badge-next { background: rgba(245, 158, 11, 0.15); color: var(--next-amber); }
+
+    /* Form */
+    .form-group { margin-bottom: 20px; }
+    .form-group label { display: block; font-size: 14px; font-weight: 500; color: var(--text-muted); margin-bottom: 6px; }
+    .form-group input, .form-group textarea {
+      width: 100%; background: var(--bg-card); border: 1px solid rgba(255,255,255,0.1);
+      border-radius: var(--radius-sm); padding: 14px 16px; color: var(--text);
+      font-family: var(--font); font-size: 16px; outline: none; transition: border-color 0.2s;
+    }
+    .form-group input:focus, .form-group textarea:focus { border-color: var(--accent); }
+    .form-group textarea { resize: vertical; min-height: 80px; }
+    .form-group input::placeholder, .form-group textarea::placeholder { color: rgba(255,255,255,0.25); }
+
+    .submit-btn {
+      width: 100%; padding: 16px; background: var(--accent); color: white; border: none;
+      border-radius: var(--radius-sm); font-family: var(--font); font-size: 1rem; font-weight: 600;
+      cursor: pointer; transition: all 0.2s; margin-top: 8px;
+    }
+    .submit-btn:hover:not(:disabled) { background: var(--accent-light); }
+    .submit-btn:disabled { opacity: 0.5; cursor: not-allowed; }
+
+    .error-msg { color: #EF4444; font-size: 14px; margin-top: 8px; }
+
+    /* Success state */
+    .success-state {
+      display: none; text-align: center; padding: 60px 20px;
+    }
+    .success-state.visible { display: block; }
+    .success-check {
+      width: 80px; height: 80px; margin: 0 auto 24px; background: rgba(34, 197, 94, 0.15);
+      border-radius: 50%; display: flex; align-items: center; justify-content: center;
+    }
+    .success-check svg { width: 40px; height: 40px; color: var(--live-green); }
+    .success-state h2 { font-size: 2rem; font-weight: 700; margin-bottom: 8px; }
+    .success-state p { color: var(--text-muted); font-size: 1.05rem; }
+
+    .form-area { transition: opacity 0.3s; }
+    .form-area.hidden { display: none; }
+  </style>
+</head>
+<body>
+  <div class="page">
+    <a href="/" class="back-link">
+      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 12H5M12 19l-7-7 7-7"/></svg>
+      Back to Home
+    </a>
+
+    <div class="form-area" id="formArea">
+      <h1>Join the Waitlist</h1>
+      <p class="subtitle">Pick the condition that matters to you.</p>
+
+      <div class="conditions" id="conditions">
+        <div class="condition-card" data-condition="Aphasia">
+          <div class="name">Aphasia</div>
+          <span class="badge badge-live">Live</span>
+        </div>
+        <div class="condition-card" data-condition="Dementia">
+          <div class="name">Dementia</div>
+          <span class="badge badge-next">Next</span>
+        </div>
+        <div class="condition-card" data-condition="Autism">
+          <div class="name">Autism</div>
+        </div>
+        <div class="condition-card" data-condition="ALS">
+          <div class="name">ALS</div>
+        </div>
+        <div class="condition-card" data-condition="Stroke Recovery">
+          <div class="name">Stroke Recovery</div>
+        </div>
+        <div class="condition-card" data-condition="Pediatric Speech">
+          <div class="name">Pediatric Speech</div>
+        </div>
+      </div>
+
+      <form id="waitlistForm" autocomplete="on">
+        <div class="form-group">
+          <label for="name">Name</label>
+          <input type="text" id="name" name="name" placeholder="Your name" required autocomplete="name">
+        </div>
+        <div class="form-group">
+          <label for="email">Email</label>
+          <input type="email" id="email" name="email" placeholder="you@example.com" required autocomplete="email">
+        </div>
+        <div class="form-group">
+          <label for="message">Message <span style="color: var(--text-muted); font-weight: 400;">(optional)</span></label>
+          <textarea id="message" name="message" placeholder="Tell us about your situation or what you're looking for..."></textarea>
+        </div>
+        <button type="submit" class="submit-btn" id="submitBtn">Join the Waitlist</button>
+        <div class="error-msg" id="errorMsg" hidden></div>
+      </form>
+    </div>
+
+    <div class="success-state" id="successState">
+      <div class="success-check">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="20 6 9 17 4 12"></polyline>
+        </svg>
+      </div>
+      <h2>You're on the list.</h2>
+      <p>We'll reach out when your condition launches.</p>
+    </div>
+  </div>
+
+  <script>
+    const SUPABASE_URL = 'https://zgdjxqaainynovabvprb.supabase.co';
+    const SUPABASE_ANON_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6InpnZGp4cWFhaW55bm92YWJ2cHJiIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NDY4MTM4MjcsImV4cCI6MjA2MjM4OTgyN30.nm6e9Ojlwf_PwrcngGWEzaRbZB1eMazlEn_xVNCr-Y4';
+
+    let selectedCondition = null;
+
+    // Condition card selection
+    document.querySelectorAll('.condition-card').forEach(card => {
+      card.addEventListener('click', () => {
+        document.querySelectorAll('.condition-card').forEach(c => c.classList.remove('selected'));
+        card.classList.add('selected');
+        selectedCondition = card.dataset.condition;
+      });
+    });
+
+    // Form submission
+    document.getElementById('waitlistForm').addEventListener('submit', async (e) => {
+      e.preventDefault();
+
+      const name = document.getElementById('name').value.trim();
+      const email = document.getElementById('email').value.trim();
+      const message = document.getElementById('message').value.trim();
+      const errorMsg = document.getElementById('errorMsg');
+      const submitBtn = document.getElementById('submitBtn');
+
+      errorMsg.hidden = true;
+
+      if (!name || !email) {
+        errorMsg.textContent = 'Please fill in your name and email.';
+        errorMsg.hidden = false;
+        return;
+      }
+
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Submitting...';
+
+      try {
+        const res = await fetch(`${SUPABASE_URL}/rest/v1/waitlist`, {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+            'apikey': SUPABASE_ANON_KEY,
+            'Authorization': `Bearer ${SUPABASE_ANON_KEY}`,
+            'Prefer': 'return=minimal',
+          },
+          body: JSON.stringify({
+            name,
+            email,
+            condition: selectedCondition || null,
+            message: message || null,
+          }),
+        });
+
+        if (res.ok || res.status === 409) {
+          document.getElementById('formArea').classList.add('hidden');
+          document.getElementById('successState').classList.add('visible');
+        } else {
+          const text = await res.text();
+          throw new Error(text || `HTTP ${res.status}`);
+        }
+      } catch (err) {
+        errorMsg.textContent = 'Something went wrong. Please try again.';
+        errorMsg.hidden = false;
+        submitBtn.disabled = false;
+        submitBtn.textContent = 'Join the Waitlist';
+        console.error('Waitlist error:', err);
+      }
+    });
+  </script>
+</body>
+</html>
