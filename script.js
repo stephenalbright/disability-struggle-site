@@ -143,6 +143,7 @@ heroTl
   .to('.hero-logo', { opacity: 1, duration: 1, ease: 'power2.out' })
   .to('.hero-wordmark', { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, '-=0.3')
   .to('.hero-mission', { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, '-=0.3')
+  .to('.hero-conditions', { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, '-=0.3')
   .to('.hero-tagline', { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, '-=0.2')
   .to('.scroll-indicator', { opacity: 1, duration: 0.6, ease: 'power2.out' }, '-=0.2');
 
