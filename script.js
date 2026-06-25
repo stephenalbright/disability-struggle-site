@@ -4,6 +4,20 @@
 
 gsap.registerPlugin(ScrollTrigger);
 
+// Reduced motion: reveal every animated element immediately so nothing depends
+// on entrance/scroll motion to become visible, and suppress the motion itself.
+const PREFERS_REDUCED_MOTION =
+  window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+if (PREFERS_REDUCED_MOTION) {
+  const style = document.createElement('style');
+  style.textContent =
+    '.hero-logo,.hero-wordmark,.hero-mission,.hero-conditions,.hero-support,' +
+    '.scroll-indicator,.product-card,.phone-mockup,.card,[data-card],[data-diff],' +
+    '[data-problem],.about-content,.platform-text,.platform-diagram,.section-title,' +
+    '.waitlist-inner{opacity:1!important;transform:none!important;}';
+  document.head.appendChild(style);
+}
+
 // ═══════════════════════════════════════════
 // HERO — GRADIENT MESH + PARTICLES
 // ═══════════════════════════════════════════
@@ -11,6 +25,10 @@ gsap.registerPlugin(ScrollTrigger);
   const canvas = document.getElementById('hero-canvas');
   if (!canvas) return;
   const ctx = canvas.getContext('2d');
+
+  // Respect reduced-motion: render one static frame, never start the rAF loop.
+  const prefersReducedMotion =
+    window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
   let w, h, particles, meshPoints;
   const PARTICLE_COUNT = 120;
@@ -127,7 +145,7 @@ gsap.registerPlugin(ScrollTrigger);
     }
 
     frame++;
-    requestAnimationFrame(draw);
+    if (!prefersReducedMotion) requestAnimationFrame(draw);
   }
 
   resize();
@@ -144,7 +162,7 @@ heroTl
   .to('.hero-wordmark', { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, '-=0.3')
   .to('.hero-mission', { opacity: 1, y: 0, duration: 0.8, ease: 'power2.out' }, '-=0.3')
   .to('.hero-conditions', { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, '-=0.3')
-  .to('.hero-tagline', { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, '-=0.2')
+  .to('.hero-support', { opacity: 1, y: 0, duration: 0.6, ease: 'power2.out' }, '-=0.2')
   .to('.scroll-indicator', { opacity: 1, duration: 0.6, ease: 'power2.out' }, '-=0.2');
 
 // ═══════════════════════════════════════════
@@ -279,7 +297,7 @@ gsap.from('.platform-diagram', {
   },
 });
 
-// --- Built Different: stagger in ---
+// --- Recovery gap: stagger in ---
 gsap.from('.built-different .section-title', {
   opacity: 0,
   y: 30,
@@ -301,19 +319,6 @@ gsap.to('[data-diff]', {
   scrollTrigger: {
     trigger: '.diff-grid',
     start: 'top 80%',
-    toggleActions: 'play none none none',
-  },
-});
-
-// --- Credential tags: fade in ---
-gsap.to('.about-creds', {
-  opacity: 1,
-  y: 0,
-  duration: 0.6,
-  ease: 'power2.out',
-  scrollTrigger: {
-    trigger: '.about-creds',
-    start: 'top 90%',
     toggleActions: 'play none none none',
   },
 });

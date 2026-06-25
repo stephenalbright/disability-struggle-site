@@ -35,7 +35,12 @@ html {
 body {
   font-family: var(--font-body);
   font-size: 20px;
-  background: var(--bg);
+  background-color: var(--bg);
+  /* One continuous dark canvas with a faint, fixed dot field for depth.
+     Keeps the whole page in the hero's "neural" universe without any motion. */
+  background-image: radial-gradient(circle at center, rgba(255, 255, 255, 0.035) 1px, transparent 1.6px);
+  background-size: 46px 46px;
+  background-attachment: fixed;
   color: var(--text);
   line-height: 1.6;
   overflow-x: hidden;
@@ -248,14 +253,15 @@ body {
   line-height: 1.5;
 }
 
-.hero-tagline {
-  font-size: clamp(1.2rem, 2.5vw, 1.6rem);
-  color: var(--accent);
-  font-weight: 500;
-  margin-top: 12px;
+.hero-support {
+  font-size: clamp(1rem, 1.8vw, 1.2rem);
+  color: var(--text-muted);
+  font-weight: 400;
+  margin: 22px auto 0;
+  max-width: 620px;
   opacity: 0;
-  letter-spacing: 0.04em;
-  text-transform: uppercase;
+  letter-spacing: 0.005em;
+  line-height: 1.6;
 }
 
 .scroll-indicator {
@@ -274,6 +280,76 @@ body {
 @keyframes float {
   0%, 100% { transform: translateY(0); }
   50% { transform: translateY(8px); }
+}
+
+/* ═══════════════════════════════════════════
+   AMBIENT DEPTH — Approach A
+   The hero stays the brightest, most luminous moment. Below the fold,
+   restrained pools of static light are keyed to each section's meaning.
+   No animation → zero motion cost and reduced-motion safe by default.
+   ═══════════════════════════════════════════ */
+#problem,
+#recovery-gap,
+#about,
+#aphasiagpt {
+  position: relative;
+}
+
+#recovery-gap {
+  overflow: hidden;
+}
+
+#problem > .problem-inner,
+#recovery-gap > .container,
+#about > .container,
+#aphasiagpt > .container {
+  position: relative;
+  z-index: 1;
+}
+
+/* soft handoff so the hero's light doesn't drop to flat black */
+#problem::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(59, 130, 246, 0.07), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* recovery gap — cool blue, the clinical/problem frame */
+#recovery-gap::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -140px;
+  height: 560px;
+  background: radial-gradient(ellipse 55% 100% at 50% 0%, rgba(59, 130, 246, 0.16), transparent 72%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* founder — warm amber, the one human moment on the page */
+#about::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(ellipse 60% 75% at 16% 42%, rgba(245, 158, 11, 0.10), transparent 72%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* AphasiaGPT — the live flagship gets the richest pool: green (matches LIVE) lifted by faint blue */
+#aphasiagpt::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(ellipse 55% 60% at 74% 32%, rgba(34, 197, 94, 0.14), transparent 70%),
+    radial-gradient(ellipse 50% 55% at 22% 80%, rgba(59, 130, 246, 0.08), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
 }
 
 /* ═══════════════════════════════════════════
@@ -319,7 +395,7 @@ body {
    APHASIAGPT — LIVE PRODUCT
    ═══════════════════════════════════════════ */
 .product-live {
-  padding: 80px 24px;
+  padding: 110px 24px;
 }
 
 .product-layout {
@@ -513,7 +589,7 @@ body {
    COMING SOON GRID
    ═══════════════════════════════════════════ */
 .coming-soon {
-  padding: 80px 24px;
+  padding: 110px 24px;
 }
 
 .section-title {
@@ -681,7 +757,7 @@ body {
    THE PLATFORM
    ═══════════════════════════════════════════ */
 .platform {
-  padding: 80px 24px;
+  padding: 110px 24px;
 }
 
 .platform-layout {
@@ -787,7 +863,7 @@ body {
    ABOUT / FOUNDER
    ═══════════════════════════════════════════ */
 .about {
-  padding: 80px 24px;
+  padding: 110px 24px;
 }
 
 .about-content {
@@ -834,7 +910,7 @@ body {
    BUILT DIFFERENT
    ═══════════════════════════════════════════ */
 .built-different {
-  padding: 80px 24px;
+  padding: 110px 24px;
 }
 
 .diff-grid {
@@ -1122,6 +1198,10 @@ select:focus-visible {
 
 /* --- Reduced motion --- */
 @media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
   *, *::before, *::after {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
