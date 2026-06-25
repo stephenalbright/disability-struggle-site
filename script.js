@@ -12,7 +12,7 @@ if (PREFERS_REDUCED_MOTION) {
   const style = document.createElement('style');
   style.textContent =
     '.hero-logo,.hero-wordmark,.hero-mission,.hero-conditions,.hero-support,' +
-    '.scroll-indicator,.product-card,.phone-mockup,.card,[data-card],[data-diff],' +
+    '.scroll-indicator,.product-card,.app-showcase,.card,[data-card],[data-diff],' +
     '[data-problem],.about-content,.platform-text,.platform-diagram,.section-title,' +
     '.waitlist-inner{opacity:1!important;transform:none!important;}';
   document.head.appendChild(style);
@@ -220,7 +220,7 @@ gsap.to('.product-card', {
   },
 });
 
-gsap.to('.phone-mockup', {
+gsap.to('.app-showcase', {
   opacity: 1,
   y: 0,
   duration: 1,

@@ -423,6 +423,10 @@ body {
   border-color: rgba(59, 130, 246, 0.2);
 }
 
+.product-card .badge--live {
+  margin-bottom: 18px;
+}
+
 /* --- Phone Mockup --- */
 .phone-mockup {
   flex-shrink: 0;
@@ -547,12 +551,25 @@ body {
 @media (max-width: 900px) {
   .product-layout {
     flex-direction: column;
-    gap: 40px;
+    gap: 48px;
   }
 
-  .phone-frame {
-    width: 260px;
-    height: 520px;
+  .app-showcase {
+    width: min(330px, 86vw);
+    height: auto;
+  }
+
+  .app-shot--back {
+    display: none;
+  }
+
+  .app-shot--front {
+    position: static;
+    width: 100%;
+    box-shadow:
+      0 30px 70px rgba(0, 0, 0, 0.55),
+      0 0 60px rgba(34, 197, 94, 0.12),
+      0 0 0 1px rgba(255, 255, 255, 0.05);
   }
 }
 
@@ -583,6 +600,97 @@ body {
   font-size: 1.2rem;
   line-height: 1.7;
   margin-bottom: 32px;
+}
+
+/* --- Eyebrow label (editorial hierarchy) --- */
+.eyebrow {
+  display: block;
+  font-size: 0.8rem;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
+  opacity: 0.85;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+.eyebrow--left {
+  text-align: left;
+}
+
+/* --- Section subtitle under a section title --- */
+.section-sub {
+  text-align: center;
+  color: var(--text-muted);
+  font-size: 1.25rem;
+  line-height: 1.6;
+  max-width: 620px;
+  margin: -44px auto 60px;
+}
+
+/* --- AphasiaGPT real-app showcase --- */
+.app-showcase {
+  position: relative;
+  flex-shrink: 0;
+  width: 460px;
+  height: 470px;
+  opacity: 0;
+  transform: translateY(40px);
+}
+
+.app-shot {
+  position: absolute;
+  margin: 0;
+  border-radius: 26px;
+  overflow: hidden;
+  background: #0F0F0F;
+  border: 1px solid rgba(255, 255, 255, 0.10);
+}
+
+.app-shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.app-shot--back {
+  width: 248px;
+  left: 0;
+  top: 12px;
+  z-index: 1;
+  filter: brightness(0.86) saturate(0.95);
+  box-shadow: 0 24px 60px rgba(0, 0, 0, 0.5);
+}
+
+.app-shot--front {
+  width: 322px;
+  left: 138px;
+  top: 70px;
+  z-index: 2;
+  box-shadow:
+    0 40px 90px rgba(0, 0, 0, 0.6),
+    0 0 70px rgba(34, 197, 94, 0.12),
+    0 0 0 1px rgba(255, 255, 255, 0.05);
+  transition: transform 0.4s ease;
+}
+
+.app-shot--front:hover {
+  transform: translateY(-6px);
+}
+
+/* --- Founder signature --- */
+.about-signature {
+  margin-top: 30px;
+  font-size: 1.05rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  color: var(--text);
+}
+
+.about-signature span {
+  color: var(--text-muted);
+  font-weight: 400;
 }
 
 /* ═══════════════════════════════════════════
