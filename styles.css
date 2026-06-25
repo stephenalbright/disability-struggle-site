@@ -291,63 +291,102 @@ body {
 #problem,
 #recovery-gap,
 #about,
-#aphasiagpt {
+#aphasiagpt,
+#coming-soon,
+#platform {
   position: relative;
-}
-
-#recovery-gap {
-  overflow: hidden;
 }
 
 #problem > .problem-inner,
 #recovery-gap > .container,
 #about > .container,
-#aphasiagpt > .container {
+#aphasiagpt > .container,
+#coming-soon > .container,
+#platform > .container {
   position: relative;
   z-index: 1;
 }
 
-/* soft handoff so the hero's light doesn't drop to flat black */
+/* Each pool extends beyond its own section (negative top/bottom) so adjacent
+   colors overlap at the seams — the page reads as one continuous field of light
+   that gently descends from the hero rather than switching on and off. */
+
+/* hero -> problem handoff, cool and soft */
 #problem::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 70% 60% at 50% 0%, rgba(59, 130, 246, 0.07), transparent 70%);
+  left: 0;
+  right: 0;
+  top: -160px;
+  bottom: -160px;
+  background: radial-gradient(ellipse 90% 48% at 50% 20%, rgba(59, 130, 246, 0.10), transparent 72%);
   pointer-events: none;
   z-index: 0;
 }
 
-/* recovery gap — cool blue, the clinical/problem frame */
+/* recovery gap — cool blue, bleeds up into the problem and down toward the founder */
 #recovery-gap::before {
   content: '';
   position: absolute;
   left: 0;
   right: 0;
-  top: -140px;
-  height: 560px;
-  background: radial-gradient(ellipse 55% 100% at 50% 0%, rgba(59, 130, 246, 0.16), transparent 72%);
+  top: -220px;
+  bottom: -180px;
+  background: radial-gradient(ellipse 80% 46% at 50% 16%, rgba(59, 130, 246, 0.15), transparent 74%);
   pointer-events: none;
   z-index: 0;
 }
 
-/* founder — warm amber, the one human moment on the page */
+/* founder — warm amber, overlapping the cool above and the green below */
 #about::before {
   content: '';
   position: absolute;
-  inset: 0;
-  background: radial-gradient(ellipse 60% 75% at 16% 42%, rgba(245, 158, 11, 0.10), transparent 72%);
+  left: 0;
+  right: 0;
+  top: -200px;
+  bottom: -200px;
+  background: radial-gradient(ellipse 72% 58% at 26% 50%, rgba(245, 158, 11, 0.12), transparent 74%);
   pointer-events: none;
   z-index: 0;
 }
 
-/* AphasiaGPT — the live flagship gets the richest pool: green (matches LIVE) lifted by faint blue */
+/* AphasiaGPT — green flagship pool that spills down into What's Next */
 #aphasiagpt::before {
   content: '';
   position: absolute;
-  inset: 0;
+  left: 0;
+  right: 0;
+  top: -200px;
+  bottom: -240px;
   background:
-    radial-gradient(ellipse 55% 60% at 74% 32%, rgba(34, 197, 94, 0.14), transparent 70%),
-    radial-gradient(ellipse 50% 55% at 22% 80%, rgba(59, 130, 246, 0.08), transparent 70%);
+    radial-gradient(ellipse 62% 58% at 74% 38%, rgba(34, 197, 94, 0.14), transparent 72%),
+    radial-gradient(ellipse 64% 46% at 34% 96%, rgba(34, 197, 94, 0.06), transparent 72%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* What's Next — a very faint cool catch so the green never hits a flat wall */
+#coming-soon::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -200px;
+  bottom: -160px;
+  background: radial-gradient(ellipse 85% 40% at 50% 6%, rgba(59, 130, 246, 0.05), transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* Platform — faint violet settling toward the close of the page */
+#platform::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: -160px;
+  bottom: -180px;
+  background: radial-gradient(ellipse 76% 55% at 50% 45%, rgba(139, 92, 246, 0.07), transparent 74%);
   pointer-events: none;
   z-index: 0;
 }
@@ -560,6 +599,21 @@ body {
 
   .app-shot--phone {
     width: min(264px, 72vw);
+  }
+
+  .about-grid {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 40px;
+  }
+
+  .about-content {
+    max-width: 100%;
+  }
+
+  .about-portrait {
+    width: min(320px, 80vw);
+    align-self: center;
   }
 }
 
@@ -955,8 +1009,55 @@ body {
   padding: 110px 24px;
 }
 
+.about-grid {
+  display: flex;
+  align-items: center;
+  gap: 72px;
+  max-width: 1080px;
+  margin: 0 auto;
+}
+
 .about-content {
-  max-width: 680px;
+  flex: 1;
+  max-width: 600px;
+}
+
+.about-portrait {
+  flex-shrink: 0;
+  width: 340px;
+  margin: 0;
+}
+
+.about-portrait-frame {
+  position: relative;
+  border-radius: 20px;
+  overflow: hidden;
+  border: 1px solid rgba(245, 158, 11, 0.16);
+  box-shadow:
+    0 40px 90px rgba(0, 0, 0, 0.55),
+    0 0 80px rgba(245, 158, 11, 0.10);
+}
+
+.about-portrait-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+.about-portrait-frame::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, transparent 60%, rgba(10, 10, 10, 0.5) 100%);
+  pointer-events: none;
+}
+
+.about-portrait figcaption {
+  margin-top: 16px;
+  font-size: 0.95rem;
+  font-style: italic;
+  color: var(--text-muted);
+  text-align: center;
 }
 
 .about-text {
@@ -1080,7 +1181,8 @@ body {
 }
 
 .waitlist-form input,
-.waitlist-form select {
+.waitlist-form select,
+.waitlist-form textarea {
   width: 100%;
   padding: 16px 20px;
   background: var(--bg-card);
@@ -1094,12 +1196,20 @@ body {
   -webkit-appearance: none;
 }
 
-.waitlist-form input::placeholder {
+.waitlist-needs {
+  min-height: 56px;
+  line-height: 1.5;
+  resize: vertical;
+}
+
+.waitlist-form input::placeholder,
+.waitlist-form textarea::placeholder {
   color: var(--text-muted);
 }
 
 .waitlist-form input:focus,
-.waitlist-form select:focus {
+.waitlist-form select:focus,
+.waitlist-form textarea:focus {
   outline: none;
   border-color: var(--accent);
   box-shadow: 0 0 0 3px var(--accent-glow);

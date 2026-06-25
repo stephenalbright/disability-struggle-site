@@ -109,27 +109,36 @@
   <!-- ═══════════════════════════════════════════ -->
   <section id="about" class="about">
     <div class="container">
-      <div class="about-content">
-        <span class="eyebrow eyebrow--left">Our story</span>
-        <h2 class="section-title section-title--left">Why this exists</h2>
-        <p class="about-text">
-          In 2020, Stephen Albright went in for brain surgery and woke up with
-          aphasia. The words were still in his head — he just couldn't get them out.
-          Saying his own name, reading a menu, finishing a sentence: all of it had
-          to be relearned, one rep at a time.
-        </p>
-        <p class="about-text">
-          The hardest part wasn't the weekly therapy hour. It was the other six days
-          — alone at the kitchen table, no one to practice with, no way to tell if he
-          was getting better. So he built the thing he'd needed: AphasiaGPT, a
-          companion that lets people practice every day, between sessions, at their
-          own pace.
-        </p>
-        <p class="about-text">
-          Disability Driven is that idea widened to every brain that has to relearn
-          how to connect — built by someone who has done the relearning.
-        </p>
-        <p class="about-signature">Stephen Albright <span>— Founder, Disability Driven</span></p>
+      <div class="about-grid">
+        <div class="about-content">
+          <span class="eyebrow eyebrow--left">Our story</span>
+          <h2 class="section-title section-title--left">Why this exists</h2>
+          <p class="about-text">
+            In 2020, Stephen Albright went in for brain surgery and woke up with
+            aphasia. The words were still in his head — he just couldn't get them out.
+            Saying his own name, reading a menu, finishing a sentence: all of it had
+            to be relearned, one rep at a time.
+          </p>
+          <p class="about-text">
+            The hardest part wasn't the weekly therapy hour. It was the other six days
+            — alone at the kitchen table, no one to practice with, no way to tell if he
+            was getting better. So he built the thing he'd needed: AphasiaGPT, a
+            companion that lets people practice every day, between sessions, at their
+            own pace.
+          </p>
+          <p class="about-text">
+            Disability Driven is that idea widened to every brain that has to relearn
+            how to connect — built by someone who has done the relearning.
+          </p>
+          <p class="about-signature">Stephen Albright <span>— Founder, Disability Driven</span></p>
+        </div>
+        <figure class="about-portrait">
+          <div class="about-portrait-frame">
+            <img src="screenshots/founder.jpg" width="1000" height="1500" loading="lazy"
+                 alt="Stephen Albright, founder of Disability Driven, standing in a forest">
+          </div>
+          <figcaption>In 2020, he couldn't say his own name.</figcaption>
+        </figure>
       </div>
     </div>
   </section>
@@ -192,7 +201,7 @@
               </svg>
             </div>
             <h3 class="card-title">Stroke &amp; TBI Recovery</h3>
-            <p class="card-desc">Relearning speech, movement, and memory after a stroke.</p>
+            <p class="card-desc">Relearning speech, language, and memory after a stroke or brain injury.</p>
             <p class="card-for">For: SLPs, OTs, Therapists</p>
             <span class="badge badge--soon">Coming Soon</span>
             <button class="btn btn--waitlist" onclick="scrollToWaitlist('Stroke Recovery')">Join Waitlist</button>
@@ -271,11 +280,11 @@
                 <circle cx="28" cy="20" r="2" fill="currentColor" class="icon-pulse"/>
               </svg>
             </div>
-            <h3 class="card-title">Pediatrics</h3>
-            <p class="card-desc">Early help for kids learning to find their words.</p>
-            <p class="card-for">For: SLPs, Parents</p>
+            <h3 class="card-title">Kids Finding Their Words</h3>
+            <p class="card-desc">For children who have so much to say and can't yet get it out — playful practice that grows with them.</p>
+            <p class="card-for">For: Parents, SLPs</p>
             <span class="badge badge--soon">Coming Soon</span>
-            <button class="btn btn--waitlist" onclick="scrollToWaitlist('Pediatrics')">Join Waitlist</button>
+            <button class="btn btn--waitlist" onclick="scrollToWaitlist('Childhood Speech')">Join Waitlist</button>
           </div>
         </div>
 
@@ -330,7 +339,7 @@
               <div class="diagram-spoke" style="--angle: 103deg"><span>Autism</span></div>
               <div class="diagram-spoke" style="--angle: 154deg"><span>Dementia</span></div>
               <div class="diagram-spoke" style="--angle: 206deg"><span>ALS</span></div>
-              <div class="diagram-spoke" style="--angle: 257deg"><span>Pediatrics</span></div>
+              <div class="diagram-spoke" style="--angle: 257deg"><span>Kids</span></div>
               <div class="diagram-spoke" style="--angle: 309deg"><span>More</span></div>
             </div>
           </div>
@@ -368,11 +377,21 @@
               <option value="Autism">Autism</option>
               <option value="Dementia">Dementia</option>
               <option value="ALS">ALS</option>
-              <option value="Pediatrics">Pediatrics</option>
+              <option value="Childhood Speech">Kids &amp; speech</option>
               <option value="Apraxia">Apraxia</option>
               <option value="Aphasia">Aphasia</option>
               <option value="Other">Other</option>
             </select>
+          </div>
+          <div class="form-group">
+            <label for="waitlist-needs" class="sr-only">What you need most</label>
+            <textarea
+              id="waitlist-needs"
+              name="needs"
+              class="waitlist-needs"
+              rows="2"
+              placeholder="Optional: what recovery challenge or tool do you wish existed?"
+            ></textarea>
           </div>
           <button type="submit" class="btn btn--submit">
             <span class="btn-text">Join the Waitlist</span>
@@ -380,20 +399,6 @@
           </button>
           <p class="form-message" id="form-message" role="status" aria-live="polite"></p>
         </form>
-        <div id="feedback-followup" class="feedback-followup" hidden>
-          <p class="feedback-prompt">What would you want us to build for you?</p>
-          <textarea
-            id="feedback-text"
-            class="feedback-textarea"
-            placeholder="Tell us what tools or features would help most..."
-            rows="4"
-          ></textarea>
-          <button id="feedback-submit" class="btn btn--submit feedback-btn">
-            <span class="btn-text">Submit Feedback</span>
-            <span class="btn-loading" hidden>Sending...</span>
-          </button>
-          <p id="feedback-message" class="form-message" role="status" aria-live="polite"></p>
-        </div>
       </div>
     </div>
   </section>
