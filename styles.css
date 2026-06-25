@@ -33,6 +33,7 @@ html {
 }
 
 body {
+  position: relative;
   font-family: var(--font-body);
   font-size: 20px;
   background-color: var(--bg);
@@ -307,88 +308,23 @@ body {
   z-index: 1;
 }
 
-/* Each pool extends beyond its own section (negative top/bottom) so adjacent
-   colors overlap at the seams — the page reads as one continuous field of light
-   that gently descends from the hero rather than switching on and off. */
-
-/* hero -> problem handoff, cool and soft */
-#problem::before {
-  content: '';
+/* Continuous ambient light: ONE full-page layer paints every glow pool, so
+   there are no per-section boxes and therefore no horizontal seams between
+   sections. Sits behind all content (z-index:-1), above the body dot field.
+   The hero canvas stays the brightest moment; these pools are faint and blend
+   smoothly down the page. Positions are % of total page height. */
+.ambient {
   position: absolute;
-  left: 0;
-  right: 0;
-  top: -160px;
-  bottom: -160px;
-  background: radial-gradient(ellipse 90% 48% at 50% 20%, rgba(59, 130, 246, 0.10), transparent 72%);
+  inset: 0;
+  z-index: -1;
   pointer-events: none;
-  z-index: 0;
-}
-
-/* recovery gap — cool blue, bleeds up into the problem and down toward the founder */
-#recovery-gap::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: -220px;
-  bottom: -180px;
-  background: radial-gradient(ellipse 80% 46% at 50% 16%, rgba(59, 130, 246, 0.15), transparent 74%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* founder — warm amber, overlapping the cool above and the green below */
-#about::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: -200px;
-  bottom: -200px;
-  background: radial-gradient(ellipse 72% 58% at 26% 50%, rgba(245, 158, 11, 0.12), transparent 74%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* AphasiaGPT — green flagship pool that spills down into What's Next */
-#aphasiagpt::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: -200px;
-  bottom: -240px;
   background:
-    radial-gradient(ellipse 62% 58% at 74% 38%, rgba(34, 197, 94, 0.14), transparent 72%),
-    radial-gradient(ellipse 64% 46% at 34% 96%, rgba(34, 197, 94, 0.06), transparent 72%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* What's Next — a very faint cool catch so the green never hits a flat wall */
-#coming-soon::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: -200px;
-  bottom: -160px;
-  background: radial-gradient(ellipse 85% 40% at 50% 6%, rgba(59, 130, 246, 0.05), transparent 70%);
-  pointer-events: none;
-  z-index: 0;
-}
-
-/* Platform — faint violet settling toward the close of the page */
-#platform::before {
-  content: '';
-  position: absolute;
-  left: 0;
-  right: 0;
-  top: -160px;
-  bottom: -180px;
-  background: radial-gradient(ellipse 76% 55% at 50% 45%, rgba(139, 92, 246, 0.07), transparent 74%);
-  pointer-events: none;
-  z-index: 0;
+    radial-gradient(58% 16% at 50% 9%,  rgba(59, 130, 246, 0.07), transparent 78%),
+    radial-gradient(64% 16% at 50% 22%, rgba(59, 130, 246, 0.12), transparent 78%),
+    radial-gradient(56% 15% at 26% 37%, rgba(245, 158, 11, 0.11), transparent 78%),
+    radial-gradient(58% 15% at 72% 48%, rgba(34, 197, 94, 0.12), transparent 78%),
+    radial-gradient(72% 16% at 46% 63%, rgba(59, 130, 246, 0.05), transparent 80%),
+    radial-gradient(74% 18% at 52% 81%, rgba(139, 92, 246, 0.06), transparent 82%);
 }
 
 /* ═══════════════════════════════════════════
